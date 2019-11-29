@@ -1,0 +1,165 @@
+@import '../colors';
+@import '../variables';
+
+.ipa__landing-page__container {
+  background: $white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease-in-out;
+
+  overflow: hidden;
+}
+
+.ipa__landing-page__hero {
+  background: linear-gradient(
+    to left bottom,
+    $darkgray-gradient,
+    $lightgray-gradient
+  );
+
+  padding-top: 70px + $navbar-height;
+  padding-bottom: 90px;
+
+  @extend %side-padding;
+}
+
+.ipa__landing-page__hero__title {
+  color: $primary;
+  text-align: center;
+  font-size: 72px;
+  font-weight: 700;
+  @media screen and (max-width: 800px) {
+    font-size: 60px;
+  }
+  transition: all 0.3s ease-in-out;
+}
+
+.ipa__landing-page__hero__subtitle {
+  margin-top: 5px;
+
+  color: $offwhite;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 200;
+}
+
+.ipa__landing-page__hero__call-to-action {
+  margin-top: 60px;
+
+  color: $offwhite;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.ipa__landing-page__hero__button-container {
+  margin-top: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ipa__landing-page__description {
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px;
+  padding-bottom: 80px;
+
+  @extend %side-padding;
+}
+
+.ipa__landing-page__description__overview-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  margin-top: 0px;
+  margin-bottom: 0px;
+  @media screen and (max-width: 1000px) {
+    margin-top: -20px;
+    margin-bottom: -20px;
+  }
+  @media screen and (max-width: 800px) {
+    margin-top: -40px;
+    margin-bottom: -40px;
+  }
+  @media screen and (max-width: 600px) {
+    margin-top: -50px;
+    margin-bottom: -50px;
+  }
+
+  @extend %flex-direction;
+}
+
+.ipa__landing-page__description__overview-content {
+  flex: 1;
+}
+
+.ipa__landing-page__description__overview-title {
+  color: $darkgray;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.ipa__landing-page__description__overview-paragraph {
+  margin-top: 20px;
+
+  color: black;
+  font-size: 17px;
+  font-weight: 300;
+  word-spacing: 3px;
+  line-height: 25px;
+}
+
+.ipa__landing-page__footer {
+  background: $darkgray;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media screen and (max-width: 800px) {
+    justify-content: space-evenly;
+  }
+
+  @extend %side-padding, %flex-direction, %footer-height;
+}
+
+.ipa__landing-page__footer-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ipa__landing-page__footer-logo {
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  box-shadow: 0px 5px 10px 3px rgba(0, 0, 0, 0.2);
+
+  transition: all 0.2s ease-in-out;
+}
+
+.ipa__landing-page__footer-logo:hover {
+  box-shadow: 0px 5px 10px 3px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.ipa__landing-page__footer-name {
+  margin-left: 20px;
+  margin-top: 6px;
+
+  font-size: 22px;
+  font-weight: 300;
+  color: $offwhite;
+  border-bottom: 2px solid transparent;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.ipa__landing-page__footer-name:hover {
+  border-bottom: 2px solid $white;
+}

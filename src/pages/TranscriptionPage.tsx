@@ -33,6 +33,7 @@ const TranscriptionPage: React.FC<RouteComponentProps<Props>> = ({
     ],
   });
   const [resultHeight, setResultHeight] = useState(0);
+  const [shouldShowNotes, setShouldShowNotes] = useState(true);
   const [shouldShowInput, setShouldShowInput] = useState(true);
   const [shouldShowOutput, setShouldShowOutput] = useState(true);
   const [isPDFCreated, setIsPDFCreated] = useState(true);
@@ -59,6 +60,28 @@ const TranscriptionPage: React.FC<RouteComponentProps<Props>> = ({
     }
   };
 
+  const getDescription = () => {
+    if (shouldShowNotes) {
+      return (
+        <>
+          <p className='ipa__transcription__note'>{getNote()}</p>
+          <p className='ipa__transcription__note' style={{ marginTop: 10 }}>
+            Open IPA is a new service, so our database of exceptions is limited.
+            If you find a transcription error or exception, please reach out to
+            <a
+              href={`mailto:henryfellerhoff+openipa@gmail.com?subject=Feedback for Open IPA`}
+            >
+              <span className='ipa__transcription__email'>
+                henryfellerhoff@gmail.com.
+              </span>
+            </a>
+          </p>
+        </>
+      );
+    }
+    return <></>;
+  };
+
   const createPDF = () => {
     setIsPDFCreated(false);
     setTimeout(() => {
@@ -78,21 +101,18 @@ const TranscriptionPage: React.FC<RouteComponentProps<Props>> = ({
   if (language in Languages) {
     return (
       <div className='ipa__transcription__container'>
-        <h1 className='ipa__transcription__title'>
-          {language + ' Transcription'}
-        </h1>
-        <p className='ipa__transcription__note'>{getNote()}</p>
-        <p className='ipa__transcription__note' style={{ marginTop: 10 }}>
-          Open IPA is a new service, so our database of exceptions is limited.
-          If you find a transcription error or exception, please reach out to
-          <a
-            href={`mailto:henryfellerhoff+openipa@gmail.com?subject=Feedback for Open IPA`}
+        <div className='ipa__transcription__title-container'>
+          <h1 className='ipa__transcription__title' style={{ flex: 1 }}>
+            {language + ' Transcription'}
+          </h1>
+          <button
+            className='ipa__transcription__input-hide-button'
+            onClick={() => setShouldShowNotes(!shouldShowNotes)}
           >
-            <span className='ipa__transcription__email'>
-              henryfellerhoff@gmail.com.
-            </span>
-          </a>
-        </p>
+            {shouldShowNotes ? 'Hide' : 'Show'}
+          </button>
+        </div>
+        {getDescription()}
         <div className='ipa__transcription__input-container'>
           <div className='ipa__transcription__input-container-left'>
             <div className='ipa__transcription__input-container-top'>

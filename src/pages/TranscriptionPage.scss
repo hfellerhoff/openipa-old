@@ -36,6 +36,12 @@
   @extend %side-padding;
 }
 
+.ipa__transcription__title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .ipa__transcription__title {
   font-size: 36px;
   font-weight: 400;
@@ -101,6 +107,7 @@
   border: none;
   color: $white;
   width: 65px;
+  height: 25px;
   padding: 5px 0px;
   border-radius: 20px;
   font-weight: 700;

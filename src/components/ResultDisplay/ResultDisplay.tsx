@@ -113,9 +113,9 @@ const ResultElement = ({
     visibility: 'visible',
   };
   const hiddenStyle: CSSProperties = {
-    height: 100,
+    height: 0,
     visibility: 'hidden',
-    margin: -170,
+    margin: -150,
   };
 
   const style = isWidthSmallEnough && shouldHide ? hiddenStyle : visibleStyle;

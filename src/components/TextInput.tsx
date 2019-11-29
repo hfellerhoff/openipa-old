@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import './TextInput.scss';
 import useWindowDimensions from './UseWindowDimensions';
 
@@ -21,12 +21,15 @@ const TextInput: React.FC<Props> = ({
     const text = e.target.value;
     setInputText(text);
   };
+  const [inputRef, setInputRef] = useState(document.createElement('textarea'));
   const { width } = useWindowDimensions();
   const className = `ipa__text-input--${theme}`;
   const isWidthSmallEnough = width <= 800 ? true : false;
-  const textareaHeight = isWidthSmallEnough
-    ? displayHeight * (1 / 2.95)
-    : displayHeight;
+  let aghHeight = inputRef.scrollHeight;
+  if (displayHeight / 2.5 < inputRef.scrollHeight) {
+    aghHeight = displayHeight / 2.5;
+  }
+  const textareaHeight = isWidthSmallEnough ? aghHeight : displayHeight;
 
   const visibleStyle: CSSProperties = {
     height: textareaHeight,
@@ -52,6 +55,7 @@ const TextInput: React.FC<Props> = ({
       className={className}
       style={style}
       onChange={e => onChange(e)}
+      ref={input => setInputRef(input ? input : inputRef)}
     />
   );
 };

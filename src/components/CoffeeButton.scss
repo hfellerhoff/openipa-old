@@ -1,5 +1,4 @@
-$primary: #2ec794;
-
+@import '../colors';
 .bmc-button img {
   width: 35px !important;
   margin-bottom: 1px !important;
@@ -14,7 +13,7 @@ $primary: #2ec794;
   min-width: 217px !important;
   text-decoration: none !important;
   display: inline-flex !important;
-  color: #ffffff !important;
+  color: $darkgray !important;
   background-color: $primary !important;
   border-radius: 5px !important;
   border: 1px solid transparent !important;

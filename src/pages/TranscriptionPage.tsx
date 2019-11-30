@@ -41,7 +41,7 @@ const TranscriptionPage: React.FC<RouteComponentProps<Props>> = ({
   const capitalizedLanguage = capitalizeFirstLetter(language);
 
   const parseText = (text: string) => {
-    switch (capitalizedLanguage as Languages) {
+    switch (language as Languages) {
       case Languages.Latin:
         return parseLatin(text);
       case Languages.French:
@@ -52,7 +52,7 @@ const TranscriptionPage: React.FC<RouteComponentProps<Props>> = ({
   };
 
   const getNote = (): string => {
-    switch (capitalizedLanguage as Languages) {
+    switch (language as Languages) {
       case Languages.Latin:
         return '';
       case Languages.French:

@@ -2,6 +2,7 @@ import React from 'react';
 import { Languages } from '../../constants/Interfaces';
 import { Link } from 'react-router-dom';
 import './LanguageSelectButton.scss';
+import { capitalizeFirstLetter } from '../../constants/StringHelper';
 
 interface Props {
   language: Languages;
@@ -14,11 +15,11 @@ const LanguageSelectButton: React.FC<Props> = ({ language, status }) => {
   if (status !== 'inactive') {
     return (
       <Link className={className} to={`/${language}`}>
-        {language}
+        {capitalizeFirstLetter(language)}
       </Link>
     );
   }
-  return <div className={className}>{language}</div>;
+  return <div className={className}>{capitalizeFirstLetter(language)}</div>;
 };
 
 export default LanguageSelectButton;

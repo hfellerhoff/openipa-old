@@ -43,21 +43,27 @@
 }
 
 .ipa__transcription__title {
-  font-size: 36px;
-  font-weight: 400;
+  font-size: 24px;
+  font-weight: 500;
   color: $offwhite;
 
   @media screen and (min-width: 1000px) {
-    font-size: 48px;
+    font-size: 42px;
   }
   @media screen and (max-width: 1000px) {
-    font-size: 44px;
+    font-size: 38px;
   }
   @media screen and (max-width: 800px) {
-    font-size: 40px;
+    font-size: 34px;
   }
   @media screen and (max-width: 600px) {
-    font-size: 36px;
+    font-size: 30px;
+  }
+  @media screen and (max-width: 550px) {
+    font-size: 28px;
+  }
+  @media screen and (max-width: 500px) {
+    font-size: 26px;
   }
 
   transition: font-size 0.3s ease-in-out;

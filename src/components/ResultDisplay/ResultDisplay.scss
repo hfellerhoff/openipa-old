@@ -42,6 +42,10 @@
   position: relative;
   display: inline-block;
   border-bottom: 2px solid transparent;
+
+  @media screen and (max-width: 800px) {
+    position: initial;
+  }
 }
 
 .ipa__result-tooltip:hover,
@@ -64,15 +68,28 @@
   border-radius: 6px;
   bottom: 100%;
   margin-bottom: 10px;
-  left: 50%;
   margin-left: -100px;
-  padding: 10px;
+  padding: 20px;
+  box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.3);
+
+  @media screen and (max-width: 800px) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    padding: 40px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 5px 10px 10px rgba(0, 0, 0, 0.3);
+  }
 
   z-index: 1;
 
   background-color: $darkgray;
   color: $white;
-  box-shadow: 0px 5px 10px 3px rgba(0, 0, 0, 0.3);
 }
 
 .ipa__result-tooltip--light .ipa__result-tooltip-text--light {

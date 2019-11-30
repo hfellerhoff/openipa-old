@@ -17,10 +17,10 @@ export interface Result {
 }
 
 export enum Languages {
-  Latin = 'Latin',
-  German = 'German',
-  Italian = 'Italian',
-  French = 'French',
+  Latin = 'latin',
+  German = 'german',
+  Italian = 'italian',
+  French = 'french',
 }
 
 export enum IPA {

@@ -10,6 +10,7 @@ import { PulseLoader } from 'react-spinners';
 import './TranscriptionPage.scss';
 import createPDFFromResult from '../util/CreatePDF';
 import copyResult from '../util/CopyResult';
+import { capitalizeFirstLetter } from '../constants/StringHelper';
 
 type Props = {
   language: string;
@@ -37,9 +38,10 @@ const TranscriptionPage: React.FC<RouteComponentProps<Props>> = ({
   const [shouldShowInput, setShouldShowInput] = useState(true);
   const [shouldShowOutput, setShouldShowOutput] = useState(true);
   const [isPDFCreated, setIsPDFCreated] = useState(true);
+  const capitalizedLanguage = capitalizeFirstLetter(language);
 
   const parseText = (text: string) => {
-    switch (language as Languages) {
+    switch (capitalizedLanguage as Languages) {
       case Languages.Latin:
         return parseLatin(text);
       case Languages.French:
@@ -50,7 +52,7 @@ const TranscriptionPage: React.FC<RouteComponentProps<Props>> = ({
   };
 
   const getNote = (): string => {
-    switch (language as Languages) {
+    switch (capitalizedLanguage as Languages) {
       case Languages.Latin:
         return '';
       case Languages.French:
@@ -98,12 +100,12 @@ const TranscriptionPage: React.FC<RouteComponentProps<Props>> = ({
     // eslint-disable-next-line
   }, [inputText]);
 
-  if (language in Languages) {
+  if (capitalizedLanguage in Languages) {
     return (
       <div className='ipa__transcription__container'>
         <div className='ipa__transcription__title-container'>
           <h1 className='ipa__transcription__title' style={{ flex: 1 }}>
-            {language + ' Transcription'}
+            {capitalizedLanguage + ' Transcription'}
           </h1>
           <button
             className='ipa__transcription__input-hide-button'
@@ -172,7 +174,7 @@ const TranscriptionPage: React.FC<RouteComponentProps<Props>> = ({
       </div>
     );
   } else {
-    return <Redirect to='/ipa' />;
+    return <Redirect to='/' />;
   }
 };
 

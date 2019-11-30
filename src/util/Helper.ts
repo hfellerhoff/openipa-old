@@ -26,7 +26,7 @@ export const getCharArray = (text: string) => {
 
 export const isSpace = (char: string) => {
   if (!char) return false;
-  return char === ' ' || char === '' || char === '\n';
+  return char === ' ' || char === '' || char === '\n' || char === '	';
 };
 
 export const isPunctuation = (char: string) => {

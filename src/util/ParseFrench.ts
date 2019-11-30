@@ -571,6 +571,20 @@ const parseFrench = (text: string) => {
             rule: Rules.SINGLE_A + Notes.GLIDE_FOLLOWING,
           };
         }
+        // -aim and -ain nasal
+        else if (
+          nextLetter === 'i' &&
+          (nextlettersecond === 'm' || nextlettersecond === 'n') &&
+          isConsonant(nextletterthird) &&
+          !isNasalCanceling(nextletterthird)
+        ) {
+          phoneme = {
+            text: 'ai' + nextlettersecond,
+            ipa: IPA.NASAL_E,
+            rule: Rules.NASAL_AIM,
+          };
+          indexToAdd = 2;
+        }
         // -am and -an nasal
         else if (
           (nextLetter === 'm' || nextLetter === 'n') &&
@@ -689,6 +703,46 @@ const parseFrench = (text: string) => {
             ipa: IPA.SCHWA,
             rule: Rules.INTERCONSONANT_SCHWA,
           };
+        }
+        // FINAL -en(s)
+        else if (
+          nextLetter === 'n' &&
+          (isEndOfSentence(nextlettersecond) ||
+            (nextlettersecond === 's' && isEndOfSentence(nextletterthird)))
+        ) {
+          phoneme = {
+            text: 'en' + (nextlettersecond === 's' ? 's' : ''),
+            ipa: IPA.NASAL_E,
+            rule: Rules.FINAL_ENS,
+          };
+          nextlettersecond === 's' ? (indexToAdd = 2) : (indexToAdd = 1);
+        }
+        // -ein nasal
+        else if (
+          nextLetter === 'i' &&
+          nextlettersecond === 'n' &&
+          isConsonant(nextletterthird) &&
+          !isNasalCanceling(nextletterthird)
+        ) {
+          phoneme = {
+            text: 'ein',
+            ipa: IPA.NASAL_E,
+            rule: Rules.NASAL_AIM,
+          };
+          indexToAdd = 2;
+        }
+        // -em and -en nasal
+        else if (
+          (nextLetter === 'm' || nextLetter === 'n') &&
+          isConsonant(nextlettersecond) &&
+          !isNasalCanceling(nextlettersecond)
+        ) {
+          phoneme = {
+            text: 'e' + nextLetter,
+            ipa: IPA.NASAL_A,
+            rule: Rules.NASAL_EAMN_CONSONANT,
+          };
+          indexToAdd = 1;
         } else if (
           nextLetter === 'i' &&
           !isGlideFollowing(
@@ -707,19 +761,7 @@ const parseFrench = (text: string) => {
           };
           indexToAdd = 1;
         }
-        // -em and -en nasal
-        else if (
-          (nextLetter === 'm' || nextLetter === 'n') &&
-          isConsonant(nextlettersecond) &&
-          !isNasalCanceling(nextlettersecond)
-        ) {
-          phoneme = {
-            text: 'e' + nextLetter,
-            ipa: IPA.NASAL_A,
-            rule: Rules.NASAL_EAMN_CONSONANT,
-          };
-          indexToAdd = 1;
-        }
+
         // eu + s + vowel
         else if (
           nextLetter === 'u' &&
@@ -1081,8 +1123,23 @@ const parseFrench = (text: string) => {
             ipa: IPA.J_GLIDE + IPA.NASAL_E,
             rule: Rules.FINAL_VERB_IENT,
           };
-          indexToAdd = 4;
+          indexToAdd = 3;
         }
+        // in and im nasal
+        else if (
+          (nextLetter === 'm' || nextLetter === 'n') &&
+          ((isConsonant(nextlettersecond) &&
+            !isNasalCanceling(nextlettersecond)) ||
+            isEndOfSentence(nextletterfourth))
+        ) {
+          phoneme = {
+            text: 'i' + nextLetter,
+            ipa: IPA.NASAL_E,
+            rule: Rules.NASAL_AIM,
+          };
+          indexToAdd = 1;
+        }
+
         // Medial ill
         else if (
           !isEndOfSentence(previousPhoneme) &&
@@ -1153,7 +1210,20 @@ const parseFrench = (text: string) => {
         };
         break;
       case 'y':
-        if (isVowel(nextLetter)) {
+        // yn and ym nasal
+        if (
+          (nextLetter === 'm' || nextLetter === 'n') &&
+          ((isConsonant(nextlettersecond) &&
+            !isNasalCanceling(nextlettersecond)) ||
+            isEndOfSentence(nextletterfourth))
+        ) {
+          phoneme = {
+            text: 'y' + nextLetter,
+            ipa: IPA.NASAL_E,
+            rule: Rules.NASAL_IY,
+          };
+          indexToAdd = 1;
+        } else if (isVowel(nextLetter)) {
           phoneme = {
             text: 'y',
             ipa: IPA.J_GLIDE,
@@ -1169,8 +1239,23 @@ const parseFrench = (text: string) => {
 
         break;
       case 'o':
-        // -om and -on nasal
+        // -oin nasal
         if (
+          nextLetter === 'i' &&
+          nextlettersecond === 'n' &&
+          ((isConsonant(nextletterthird) &&
+            !isNasalCanceling(nextletterthird)) ||
+            isEndOfSentence(nextletterthird))
+        ) {
+          phoneme = {
+            text: 'oin',
+            ipa: IPA.W_GLIDE + IPA.NASAL_E,
+            rule: Rules.NASAL_ONM_CONSONANT,
+          };
+          indexToAdd = 2;
+        }
+        // -om and -on nasal
+        else if (
           (nextLetter === 'm' || nextLetter === 'n') &&
           isConsonant(nextlettersecond) &&
           !isNasalCanceling(nextlettersecond)
@@ -1389,7 +1474,20 @@ const parseFrench = (text: string) => {
         };
         break;
       case 'u':
+        // Nasal um and un
         if (
+          (nextLetter === 'n' || nextLetter === 'm') &&
+          ((isConsonant(nextlettersecond) &&
+            !isNasalCanceling(nextlettersecond)) ||
+            isEndOfSentence(nextlettersecond))
+        ) {
+          phoneme = {
+            text: 'u' + nextLetter,
+            ipa: IPA.NASAL_MIXED_O,
+            rule: Rules.NASAL_UMN,
+          };
+          indexToAdd = 1;
+        } else if (
           nextLetter === 'e' &&
           !isEndOfSentence(previousPhoneme) &&
           !isEndOfSentence(nextlettersecond)
@@ -1437,6 +1535,8 @@ const parseFrench = (text: string) => {
       case ';':
       case '!':
       case '.':
+      case '-':
+      case '?':
       case '(':
       case ')':
         phoneme = {

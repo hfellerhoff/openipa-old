@@ -2,6 +2,7 @@ import { Result, Languages } from '../constants/Interfaces';
 import jsPDF from 'jspdf';
 import { Charis } from '../constants/fonts/CharisSIL-R-normal';
 import TrebuchetMS from '../constants/fonts/trebuchet-ms-normal';
+import TrebuchetMSBold from '../constants/fonts/trebuchet-ms-bold';
 import imageData from '../assets/logo_bw';
 
 const createPDFFromResult = async (language: Languages, result: Result) => {
@@ -9,7 +10,7 @@ const createPDFFromResult = async (language: Languages, result: Result) => {
     const pdf = new jsPDF();
     const footerY = 285;
     const maxY = footerY - 20;
-    const maxLineLength = 70;
+    const maxX = 165;
     const startX = 15;
     const startY = 20;
     const titleBottomMargin = 15;
@@ -23,6 +24,9 @@ const createPDFFromResult = async (language: Languages, result: Result) => {
 
     pdf.addFileToVFS('Trebuchet-MS.ttf', TrebuchetMS);
     pdf.addFont('Trebuchet-MS.ttf', 'Trebuchet-MS', 'normal');
+
+    pdf.addFileToVFS('Trebuchet-MS-Bold.ttf', TrebuchetMSBold);
+    pdf.addFont('Trebuchet-MS-Bold.ttf', 'Trebuchet-MS', 'bold');
 
     pdf.setFontSize(18);
     pdf.setFont('Helvetica', 'bold');
@@ -45,45 +49,65 @@ const createPDFFromResult = async (language: Languages, result: Result) => {
     pdf.setFont('Trebuchet-MS', 'normal');
     pdf.text(`https://www.openipa.org`, startX, footerY);
 
-    pdf.setFontSize(14);
     let y = startY + titleBottomMargin;
+    let x = startX;
+
+    let newLine = true;
     result.lines.forEach(line => {
-      let textLine = '';
-      let ipaLine = '';
       line.words.forEach(word => {
+        let textWord = '';
+        let ipaWord = '';
         word.syllables.forEach(syllable => {
           if (syllable.text !== '\n') {
-            textLine += syllable.text;
-            ipaLine += syllable.ipa;
+            textWord += syllable.text;
+            ipaWord += syllable.ipa;
           }
         });
-        if (textLine.length > maxLineLength || ipaLine.length > maxLineLength) {
-          pdf.setFont('Trebuchet-MS', 'normal');
-          pdf.text(textLine, startX, y);
-          pdf.setFont('Charis', 'normal');
-          pdf.text(ipaLine, startX, y + ipaLineSpacing);
+
+        pdf.setFontSize(14);
+        pdf.setFont('Trebuchet-MS', 'bold');
+        const textWidth = pdf.getTextWidth(textWord);
+        pdf.setFont('Charis', 'normal');
+        const ipaWidth = pdf.getTextWidth(ipaWord);
+
+        if (x > maxX) {
           y += fullLineSpacing;
-          textLine = '';
-          ipaLine = '';
+          x = startX;
+          newLine = true;
+        }
+
+        if (newLine) {
+          if (textWord[0] === ' ')
+            textWord = textWord.substring(1, textWord.length);
+          if (ipaWord[0] === ' ')
+            ipaWord = ipaWord.substring(1, ipaWord.length);
+        }
+
+        pdf.setFontSize(14);
+        pdf.setFont('Trebuchet-MS', 'bold');
+        pdf.text(textWord, x, y);
+        pdf.setFont('Charis', 'normal');
+        pdf.text(ipaWord, x, y + ipaLineSpacing);
+
+        newLine = false;
+
+        if (textWidth >= ipaWidth) {
+          x += textWidth + 2;
+        } else {
+          x += ipaWidth + 2;
         }
       });
+      x = startX;
+      y += fullLineSpacing;
+
       if (y >= maxY) {
         pdf.addPage();
-        pdf.setFontSize(14);
-        pdf.setFont('Helvetica', 'normal');
-        pdf.text(`https://www.henryfellerhoff.com/ipa`, startX, footerY);
+        pdf.setFontSize(12);
+        pdf.setFont('Trebuchet-MS', 'normal');
+        pdf.text(`https://www.openipa.org`, startX, footerY);
         y = startY;
+        x = startX;
       }
-
-      if (textLine[0] === ' ')
-        textLine = textLine.substring(1, textLine.length);
-      if (ipaLine[0] === ' ') ipaLine = ipaLine.substring(1, ipaLine.length);
-      pdf.setFont('Helvetica', 'bold');
-      pdf.text(textLine, startX, y);
-      pdf.setFont('Charis', 'normal');
-      pdf.text(ipaLine, startX, y + ipaLineSpacing);
-      console.log(textLine.length);
-      y += fullLineSpacing;
     });
     pdf.save('Open-IPA.pdf');
     resolve();

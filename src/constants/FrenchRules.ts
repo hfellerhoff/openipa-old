@@ -106,6 +106,12 @@ const Rules = {
   FINAL_AN: `Final 'an' letter groups are transcribed as [${IPA.NASAL_A}].`,
   NASAL_ONM_CONSONANT: `'on' and 'om' letter groups followed by a consonant (except m, n, and h) are transcribed as [${IPA.NASAL_O}].`,
   FINAL_ONM_CONSONANT: `Final 'on' and 'om' letter groups are transcribed as [${IPA.NASAL_O}].`,
+  NASAL_AIM: `'aim', 'ain', and 'ein' letter groups that are final or followed by a consonant (except m, n, and h) are transcribed as [${IPA.NASAL_E}].`,
+  NASAL_IY: `'in', 'im', 'yn', and 'ym' letter groups that are final or followed by a consonant (except m, n, and h) are transcribed as [${IPA.NASAL_E}].`,
+  FINAL_ENS: `Final -en(s) letter clusters are transcribed as [${IPA.NASAL_E}].`,
+  NASAL_OIN: `'oin' letter clusters that are final or followed by a consonant are transcribed as [${IPA.W_GLIDE +
+    IPA.NASAL_E}]`,
+  NASAL_UMN: `'um' and 'un' letter groups that are final or followed by a consonant (except m, n, and h) are transcribed as [${IPA.NASAL_MIXED_O}].`,
 };
 
 /*

@@ -29,14 +29,22 @@ export const isSpace = (char: string) => {
   return char === ' ' || char === '' || char === '\n' || char === '	';
 };
 
+export const isEndingPunctuation = (char: string) => {
+  if (!char) return false;
+  return Letters.endingpunctuation.indexOf(char.toLowerCase()) !== -1;
+};
+
 export const isPunctuation = (char: string) => {
   if (!char) return false;
-  return Letters.punctuation.indexOf(char.toLowerCase()) !== -1;
+  return (
+    Letters.endingpunctuation.indexOf(char.toLowerCase()) !== -1 ||
+    Letters.middlepunctuation.indexOf(char.toLowerCase()) !== -1
+  );
 };
 
 export const isEndOfSentence = (char: string) => {
   if (!char) return true;
-  return isSpace(char) || isPunctuation(char);
+  return isSpace(char) || isEndingPunctuation(char);
 };
 
 export const getNextWord = (

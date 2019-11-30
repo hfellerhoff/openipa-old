@@ -112,6 +112,7 @@ const Rules = {
   NASAL_OIN: `'oin' letter clusters that are final or followed by a consonant are transcribed as [${IPA.W_GLIDE +
     IPA.NASAL_E}]`,
   NASAL_UMN: `'um' and 'un' letter groups that are final or followed by a consonant (except m, n, and h) are transcribed as [${IPA.NASAL_MIXED_O}].`,
+  DEFAULT_E: `If no other rule applies, transcribe 'e' vowels as [${IPA.SCHWA}].`,
 };
 
 /*

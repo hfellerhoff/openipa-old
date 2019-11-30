@@ -5,6 +5,7 @@ import {
   isFrontVowel,
   getNextWord,
   isPunctuation,
+  isEndingPunctuation,
   isEndOfSentence,
   isBackVowel,
 } from './Helper';
@@ -721,8 +722,9 @@ const parseFrench = (text: string) => {
         else if (
           nextLetter === 'i' &&
           nextlettersecond === 'n' &&
-          isConsonant(nextletterthird) &&
-          !isNasalCanceling(nextletterthird)
+          ((isConsonant(nextletterthird) &&
+            !isNasalCanceling(nextletterthird)) ||
+            isEndOfSentence(nextletterthird))
         ) {
           phoneme = {
             text: 'ein',
@@ -743,7 +745,9 @@ const parseFrench = (text: string) => {
             rule: Rules.NASAL_EAMN_CONSONANT,
           };
           indexToAdd = 1;
-        } else if (
+        }
+        // ei
+        else if (
           nextLetter === 'i' &&
           !isGlideFollowing(
             letter,
@@ -753,7 +757,6 @@ const parseFrench = (text: string) => {
             nextletterfourth
           )
         ) {
-          // ei
           phoneme = {
             text: 'ei',
             ipa: IPA.OPEN_E,
@@ -1003,8 +1006,15 @@ const parseFrench = (text: string) => {
             ipa: IPA.OPEN_E,
             rule: Rules.SINGLE_E_DOUBLE_CONSONANT,
           };
+        } else {
+          phoneme = {
+            text: 'e',
+            ipa: IPA.SCHWA,
+            rule: Rules.DEFAULT_E,
+          };
         }
         break;
+
       case 'œ':
         // final -œu + final silent consonant
         if (
@@ -1085,7 +1095,7 @@ const parseFrench = (text: string) => {
         phoneme = {
           text: 'é',
           ipa: IPA.CLOSED_E,
-          rule: Rules.GRAVE_A,
+          rule: Rules.ACUTE_E,
         };
         break;
       case 'è':
@@ -1535,10 +1545,10 @@ const parseFrench = (text: string) => {
       case ';':
       case '!':
       case '.':
-      case '-':
       case '?':
       case '(':
       case ')':
+      case '-':
         phoneme = {
           text: letter,
           ipa: letter,
@@ -1546,6 +1556,7 @@ const parseFrench = (text: string) => {
         };
         break;
       case "'":
+      case '’':
         phoneme = {
           text: letter,
           ipa: '',
@@ -1612,7 +1623,9 @@ const parseFrench = (text: string) => {
     }
 
     currentWord.syllables.push(phoneme);
-    previousPhoneme = phoneme.ipa[phoneme.ipa.length - 1];
+    if (!isConsonant(phoneme.text)) {
+      previousPhoneme = phoneme.ipa[phoneme.ipa.length - 1];
+    }
 
     // Analyze vocalic harmonization
     if (

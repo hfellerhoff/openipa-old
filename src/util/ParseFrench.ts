@@ -1243,8 +1243,22 @@ const parseFrench = (
 
         break;
       case 'i':
-        // Final -ient verb
+        // Initial -ill, -irr, -inn, -mm
         if (
+          nextLetter + nextlettersecond === 'll' ||
+          nextLetter + nextlettersecond === 'rr' ||
+          nextLetter + nextlettersecond === 'nn' ||
+          nextLetter + nextlettersecond === 'mm'
+        ) {
+          phoneme = {
+            text: 'i' + nextLetter + nextlettersecond,
+            ipa: IPA.CLOSED_I + nextLetter + nextlettersecond,
+            rule: Rules.INITIAL_ILRNM,
+          };
+          indexToAdd = 2;
+        }
+        // Final -ient verb
+        else if (
           nextLetter === 'e' &&
           nextlettersecond === 'n' &&
           nextletterthird === 't' &&

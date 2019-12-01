@@ -114,6 +114,7 @@ const Rules = {
   FINAL_ENT: `Final '-ent' verb endings are transcribed as [${IPA.SCHWA}]. If this is not a verb, it should be transcribed as [${IPA.NASAL_A}].`,
   ELISION: `The normally transcribed [${IPA.SCHWA}] is dropped in this case due to elision, as the following word begins with a vowel. Consult your music to confirm if the schwa should not be pronounced.`,
   S_LIASON: `This normally silent 's' is pronounced as a [${IPA.Z}] in this case due to liason, as the following word begins with a vowel. Liason rules are complex, so take this transcription with a grain of salt.`,
+  INITIAL_ILRNM: `The consonants in 'ill-', 'irr-', 'inn-', and 'imm-' letter groups are doubled in transcription.`,
 };
 
 /*

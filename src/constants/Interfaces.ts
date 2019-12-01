@@ -22,3 +22,14 @@ export enum Languages {
   Italian = 'italian',
   French = 'french',
 }
+
+export interface ParseLetterProps {
+  charArray: string[];
+  phoneme: Phoneme;
+  index: number;
+  indexToAdd: number;
+  nextletter: string[];
+  previousIPA: string;
+}
+
+export type ParseLetterReturn = [Phoneme, number];

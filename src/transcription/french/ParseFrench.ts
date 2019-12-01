@@ -2,14 +2,12 @@ import {
   getCharArray,
   isConsonant,
   isVowel,
-  isFrontVowel,
   getNextWord,
   isPunctuation,
   isEndOfSentence,
-  isBackVowel,
 } from '../../util/Helper';
 import IPA from '../../constants/IPA';
-import { Result, Phoneme } from '../../constants/Interfaces';
+import { Result, Phoneme, ParseLetterProps } from '../../constants/Interfaces';
 import Rules from './FrenchRules';
 import Exceptions from './FrenchExceptions';
 import Notes from './FrenchNotes';
@@ -19,6 +17,12 @@ import {
   isNasalCanceling,
   areNoMorePronouncedConsonants,
 } from './FrenchHelper';
+import parseC from './parse-letters/parseC';
+import parseG from './parse-letters/parseG';
+import parseH from './parse-letters/parseH';
+import parseJ from './parse-letters/parseJ';
+import parseQ from './parse-letters/parseQ';
+import parseR from './parse-letters/parseR';
 
 const parseFrench = (
   text: string,
@@ -53,11 +57,6 @@ const parseFrench = (
     };
     let indexToAdd = 0;
 
-    // let previousLetter = '';
-    // if (index > 0) {
-    //   previousLetter = charArray[index - 1];
-    // }
-
     let nextLetter = '';
     if (index < charArray.length - 1) {
       nextLetter = charArray[index + 1];
@@ -88,199 +87,45 @@ const parseFrench = (
       nextlettersixth = charArray[index + 6];
     }
 
+    let nextletter = [
+      charArray[index],
+      charArray[index + 1],
+      charArray[index + 2],
+      charArray[index + 3],
+      charArray[index + 4],
+      charArray[index + 5],
+      charArray[index + 6],
+    ];
+
+    const parseProps: ParseLetterProps = {
+      phoneme,
+      index,
+      indexToAdd,
+      charArray,
+      nextletter,
+      previousIPA: previousPhoneme,
+    };
+
     switch (letter) {
       // CONSONANTS
       case 'c':
-        if (nextLetter === 'h') {
-          phoneme = {
-            text: 'ch',
-            ipa: IPA.FRICATIVE_C,
-            rule: Rules.CH,
-          };
-          indexToAdd = 1;
-        } else if (isFrontVowel(nextLetter)) {
-          phoneme = {
-            text: 'c',
-            ipa: IPA.S,
-            rule: Rules.C_FRONTVOWEL,
-          };
-        } else if (isBackVowel(nextLetter) || isEndOfSentence(nextLetter)) {
-          phoneme = {
-            text: 'c',
-            ipa: IPA.K,
-            rule: Rules.C_BACKVOWEL,
-          };
-        }
+      case 'ç':
+        [phoneme, indexToAdd] = parseC(parseProps);
         break;
       case 'g':
-        if (nextLetter === 'n') {
-          phoneme = {
-            text: 'gn',
-            ipa: IPA.BACK_SWOOP_N,
-            rule: Rules.GN,
-          };
-          indexToAdd = 1;
-        } else if (nextLetter === 'u') {
-          phoneme = {
-            text: 'gu',
-            ipa: IPA.G,
-            rule: Rules.GU,
-          };
-          indexToAdd = 1;
-        } else if (areNoMorePronouncedConsonants(charArray, index)) {
-          phoneme = {
-            text: letter,
-            ipa: '',
-            rule: Rules.SILENT_FINAL_CONSONANT,
-          };
-        } else if (isFrontVowel(nextLetter)) {
-          phoneme = {
-            text: 'g',
-            ipa: IPA.FRICATIVE_G,
-            rule: Rules.G_FRONTVOWEL,
-          };
-        } else if (isBackVowel(nextLetter)) {
-          phoneme = {
-            text: 'g',
-            ipa: IPA.G,
-            rule: Rules.G_BACKVOWEL,
-          };
-        } else if (isEndOfSentence(nextLetter)) {
-          phoneme = {
-            text: 'g',
-            ipa: '',
-            rule: Rules.SILENT_FINAL_CONSONANT,
-          };
-        }
-        break;
-      case 'ç':
-        if (areNoMorePronouncedConsonants(charArray, index)) {
-          phoneme = {
-            text: letter,
-            ipa: '',
-            rule: Rules.SILENT_FINAL_CONSONANT,
-          };
-        } else if (isEndOfSentence(nextLetter)) {
-          phoneme = {
-            text: 'ç',
-            ipa: '',
-            rule: Rules.SILENT_FINAL_CONSONANT,
-          };
-        } else {
-          phoneme = {
-            text: 'ç',
-            ipa: IPA.S,
-            rule: Rules.C_SQUIGLE,
-          };
-        }
+        [phoneme, indexToAdd] = parseG(parseProps);
         break;
       case 'h':
-        phoneme = {
-          text: 'h',
-          ipa: '',
-          rule: Rules.H,
-        };
+        [phoneme, indexToAdd] = parseH(parseProps);
         break;
       case 'j':
-        phoneme = {
-          text: 'j',
-          ipa: IPA.FRICATIVE_G,
-          rule: Rules.J,
-        };
-        if (isEndOfSentence(nextLetter)) {
-          phoneme = {
-            text: 'j',
-            ipa: '',
-            rule: Rules.SILENT_FINAL_CONSONANT,
-          };
-        } else if (areNoMorePronouncedConsonants(charArray, index)) {
-          phoneme = {
-            text: letter,
-            ipa: '',
-            rule: Rules.SILENT_FINAL_CONSONANT,
-          };
-        }
+        [phoneme, indexToAdd] = parseJ(parseProps);
         break;
       case 'q':
-        if (nextLetter === 'u') {
-          phoneme = {
-            text: 'qu',
-            ipa: IPA.K,
-            rule: Rules.QU,
-          };
-          indexToAdd = 1;
-        }
-        if (isEndOfSentence(nextLetter)) {
-          phoneme = {
-            text: 'q',
-            ipa: '',
-            rule: Rules.SILENT_FINAL_CONSONANT,
-          };
-        } else if (areNoMorePronouncedConsonants(charArray, index)) {
-          phoneme = {
-            text: letter,
-            ipa: '',
-            rule: Rules.SILENT_FINAL_CONSONANT,
-          };
-        }
+        [phoneme, indexToAdd] = parseQ(parseProps);
         break;
       case 'r':
-        // Inital -rest
-        if (
-          isEndOfSentence(previousPhoneme) &&
-          nextLetter === 'e' &&
-          nextlettersecond === 's' &&
-          nextletterthird === 't'
-        ) {
-          phoneme = {
-            text: 'rest',
-            ipa: IPA.FLIPPED_R + IPA.OPEN_E + IPA.S + IPA.T,
-            rule: Rules.INITIAL_REST,
-          };
-          indexToAdd = 3;
-        }
-        // Inital -resp
-        else if (
-          isEndOfSentence(previousPhoneme) &&
-          nextLetter === 'e' &&
-          nextlettersecond === 's' &&
-          nextletterthird === 'p'
-        ) {
-          phoneme = {
-            text: 'resp',
-            ipa: IPA.FLIPPED_R + IPA.OPEN_E + IPA.S + IPA.P,
-            rule: Rules.INITIAL_REST,
-          };
-          indexToAdd = 3;
-        }
-        // -re prefix
-        else if (
-          isEndOfSentence(previousPhoneme) &&
-          nextLetter === 'e' &&
-          !(
-            nextlettersecond === 'n' ||
-            (nextlettersecond === 'm' && !isNasalCanceling(nextletterthird))
-          )
-        ) {
-          phoneme = {
-            text: 're',
-            ipa: IPA.FLIPPED_R + IPA.SCHWA,
-            rule: Rules.RE_PREFIX,
-          };
-          indexToAdd = 1;
-        } else if (nextLetter === 'r') {
-          phoneme = {
-            text: 'rr',
-            ipa: IPA.FLIPPED_R,
-            rule: Rules.R,
-          };
-          indexToAdd = 1;
-        } else
-          phoneme = {
-            text: 'r',
-            ipa: IPA.FLIPPED_R,
-            rule: Rules.R,
-          };
+        [phoneme, indexToAdd] = parseR(parseProps);
         break;
       case 'z':
         phoneme = {

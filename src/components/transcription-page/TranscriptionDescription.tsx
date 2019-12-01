@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import useWindowDimensions from '../../hooks/UseWindowDimensions';
 import { capitalizeFirstLetter } from '../../util/StringHelper';
 import { Languages } from '../../constants/Interfaces';
-import checkmark from '../../assets/checkmark.png';
 import './TranscriptionDescription.scss';
 import HideButton from '../buttons/HideButton';
 import CheckboxButton from '../buttons/CheckboxButton';

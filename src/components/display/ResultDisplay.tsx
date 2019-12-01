@@ -1,4 +1,4 @@
-import React, { useState, useEffect, CSSProperties } from 'react';
+import React, { useState, useEffect } from 'react';
 import Rules from '../../transcription/latin/LatinRules';
 import { Word, Line, Result } from '../../constants/Interfaces';
 

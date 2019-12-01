@@ -41,6 +41,8 @@ const TranscriptionEditor: React.FC<Props> = ({
 
   useEffect(() => {
     setResult(parseText(inputText));
+    // TODO: Fix this warning
+    // eslint-disable-next-line
   }, [inputText, shouldAnalyzeElision, shouldAnalyzeLiason]);
 
   return (

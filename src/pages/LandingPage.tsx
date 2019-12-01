@@ -20,7 +20,7 @@ const LandingPage: React.FC<Props> = () => {
         </h4>
         <div className='ipa__landing-page__hero__button-container'>
           <LanguageSelectButton language={Languages.Latin} status='active' />
-          <LanguageSelectButton language={Languages.French} status='caution' />
+          <LanguageSelectButton language={Languages.French} status='active' />
           <LanguageSelectButton
             language={Languages.Italian}
             status='inactive'

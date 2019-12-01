@@ -52,8 +52,12 @@ export const getNextWord = (
   charArray: string[]
 ): [string, number] => {
   let word = '';
-  if (isSpace(charArray[index])) index++;
-  while (!isSpace(charArray[index]) && index < charArray.length) {
+  if (isSpace(charArray[index]) || isPunctuation(charArray[index])) index++;
+  while (
+    !isSpace(charArray[index]) &&
+    !isPunctuation(charArray[index]) &&
+    index < charArray.length
+  ) {
     word += charArray[index];
     index++;
   }

@@ -4,6 +4,7 @@ import { Charis } from '../constants/fonts/CharisSIL-R-normal';
 import TrebuchetMS from '../constants/fonts/trebuchet-ms-normal';
 import TrebuchetMSBold from '../constants/fonts/trebuchet-ms-bold';
 import imageData from '../assets/logo_bw';
+import { capitalizeFirstLetter } from '../constants/StringHelper';
 
 const createPDFFromResult = async (language: Languages, result: Result) => {
   return new Promise(resolve => {
@@ -31,7 +32,7 @@ const createPDFFromResult = async (language: Languages, result: Result) => {
     pdf.setFontSize(18);
     pdf.setFont('Helvetica', 'bold');
     pdf.text(
-      `Open IPA — ${language} Language Transcription`,
+      `Open IPA — ${capitalizeFirstLetter(language)} Language Transcription`,
       startX + imageWidth + 3,
       startY
     );

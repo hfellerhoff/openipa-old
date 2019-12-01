@@ -40,33 +40,84 @@ const TranscriptionPage: React.FC<RouteComponentProps<Props>> = ({
   const [isPDFCreated, setIsPDFCreated] = useState(true);
   const capitalizedLanguage = capitalizeFirstLetter(language);
 
+  // For French
+  const [shouldAnalyzeElision, setShouldAnalyzeElision] = useState(true);
+  const [shouldAnalyzeLiason, setShouldAnalyzeLiason] = useState(true);
+
   const parseText = (text: string) => {
     switch (language as Languages) {
       case Languages.Latin:
         return parseLatin(text);
       case Languages.French:
-        return parseFrench(text);
+        return parseFrench(text, shouldAnalyzeElision, shouldAnalyzeLiason);
       default:
         return parseLatin(text);
     }
   };
 
-  const getNote = (): string => {
+  const getSpecificElements = () => {
     switch (language as Languages) {
       case Languages.Latin:
-        return '';
+        return <></>;
       case Languages.French:
-        return 'Transcription for French is still incomplete, and may be lacking transcription rules and exceptions.';
+        return (
+          <div>
+            <div style={{ height: 15 }}></div>
+            <h3 className='ipa__transcription__input-title ipa__transcription__options-title'>
+              Transcription Options
+            </h3>
+            <div className='ipa__transcription__options-container'>
+              <div className='ipa__transcription__option-container'>
+                <button
+                  className='ipa__transcription__option-checkbox'
+                  onClick={() => setShouldAnalyzeElision(!shouldAnalyzeElision)}
+                >
+                  {shouldAnalyzeElision ? (
+                    <img
+                      src={require('../assets/checkmark.png')}
+                      alt=''
+                      className='ipa__transcription__option-checkbox-image'
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </button>
+                <h5 className='ipa__transcription__option-title'>
+                  Analyze Elision
+                </h5>
+              </div>
+              <div style={{ height: 10 }}></div>
+              <div className='ipa__transcription__option-container'>
+                <button
+                  className='ipa__transcription__option-checkbox'
+                  onClick={() => setShouldAnalyzeLiason(!shouldAnalyzeLiason)}
+                >
+                  {shouldAnalyzeLiason ? (
+                    <img
+                      src={require('../assets/checkmark.png')}
+                      alt=''
+                      className='ipa__transcription__option-checkbox-image'
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </button>
+                <h5 className='ipa__transcription__option-title'>
+                  Analyze Liason
+                </h5>
+              </div>
+            </div>
+          </div>
+        );
       default:
-        return '';
+        return <></>;
     }
   };
 
   const getDescription = () => {
     if (shouldShowNotes) {
       return (
-        <>
-          <p className='ipa__transcription__note'>{getNote()}</p>
+        <div className='ipa__transcription__header'>
           <p className='ipa__transcription__note' style={{ marginTop: 10 }}>
             Open IPA is a new service, so our database of exceptions is limited.
             If you find a transcription error or exception, please reach out to
@@ -78,7 +129,8 @@ const TranscriptionPage: React.FC<RouteComponentProps<Props>> = ({
               </span>
             </a>
           </p>
-        </>
+          {getSpecificElements()}
+        </div>
       );
     }
     return <></>;
@@ -97,8 +149,7 @@ const TranscriptionPage: React.FC<RouteComponentProps<Props>> = ({
 
   useEffect(() => {
     setResult(parseText(inputText));
-    // eslint-disable-next-line
-  }, [inputText]);
+  }, [inputText, shouldAnalyzeElision, shouldAnalyzeLiason]);
 
   if (capitalizedLanguage in Languages) {
     return (

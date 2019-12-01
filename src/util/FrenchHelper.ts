@@ -4,6 +4,7 @@ import Letters from './Letters';
 const PRONOUNCED_CONSONANTS = ['c', 'r', 'f', 'l'];
 
 export const isPronouncedConsonant = (consonant: string, isFinal: boolean) => {
+  if (!consonant) return false;
   if (isFinal) {
     return PRONOUNCED_CONSONANTS.indexOf(consonant.toLowerCase()) !== -1;
   } else {
@@ -36,4 +37,20 @@ export const isGlideFollowing = (
 
 export const isNasalCanceling = (char: string) => {
   return ['m', 'n', 'h', ...Letters.vowels].indexOf(char.toLowerCase()) !== -1;
+};
+
+export const areNoMorePronouncedConsonants = (
+  charArray: string[],
+  index: number
+) => {
+  let currentIndex = index;
+  while (
+    !isPronouncedConsonant(charArray[currentIndex], true) &&
+    (isConsonant(charArray[currentIndex]) ||
+      isEndOfSentence(charArray[currentIndex]))
+  ) {
+    if (isEndOfSentence(charArray[currentIndex])) return true;
+    currentIndex++;
+  }
+  return false;
 };

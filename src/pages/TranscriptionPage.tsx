@@ -11,6 +11,7 @@ import './TranscriptionPage.scss';
 import createPDFFromResult from '../util/CreatePDF';
 import copyResult from '../util/CopyResult';
 import { capitalizeFirstLetter } from '../constants/StringHelper';
+import useWindowDimensions from '../components/UseWindowDimensions';
 
 type Props = {
   language: string;
@@ -39,6 +40,9 @@ const TranscriptionPage: React.FC<RouteComponentProps<Props>> = ({
   const [shouldShowOutput, setShouldShowOutput] = useState(true);
   const [isPDFCreated, setIsPDFCreated] = useState(true);
   const capitalizedLanguage = capitalizeFirstLetter(language);
+
+  const { width } = useWindowDimensions();
+  const isWidthSmallEnough = width <= 800 ? true : false;
 
   // For French
   const [shouldAnalyzeElision, setShouldAnalyzeElision] = useState(true);
@@ -115,7 +119,7 @@ const TranscriptionPage: React.FC<RouteComponentProps<Props>> = ({
   };
 
   const getDescription = () => {
-    if (shouldShowNotes) {
+    if (shouldShowNotes || !isWidthSmallEnough) {
       return (
         <div className='ipa__transcription__header'>
           <p className='ipa__transcription__note' style={{ marginTop: 10 }}>

@@ -22,8 +22,8 @@ const TextInput: React.FC<Props> = ({
     setInputText(text);
   };
   const [inputRef, setInputRef] = useState(document.createElement('textarea'));
-  const { width } = useWindowDimensions();
   const className = `ipa__text-input--${theme}`;
+  const { width } = useWindowDimensions();
   const isWidthSmallEnough = width <= 800 ? true : false;
 
   const smallWidthHeight = 40 + inputRef.innerHTML.split('\n').length * 23.25;

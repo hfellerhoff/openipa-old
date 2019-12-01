@@ -4,7 +4,7 @@ import { Charis } from '../constants/fonts/CharisSIL-R-normal';
 import TrebuchetMS from '../constants/fonts/trebuchet-ms-normal';
 import TrebuchetMSBold from '../constants/fonts/trebuchet-ms-bold';
 import imageData from '../assets/logo_bw';
-import { capitalizeFirstLetter } from '../constants/StringHelper';
+import { capitalizeFirstLetter } from './StringHelper';
 
 const createPDFFromResult = async (language: Languages, result: Result) => {
   return new Promise(resolve => {

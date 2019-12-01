@@ -1,4 +1,4 @@
-import Letters from './Letters';
+import Letters from '../constants/Letters';
 
 export const isVowel = (char: string) => {
   if (!char) return false;

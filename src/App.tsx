@@ -1,11 +1,11 @@
 import React from 'react';
-import LandingPage from './pages/LandingPage';
-import Navbar from './components/Navbar/Navbar';
-import TranscriptionPage from './pages/TranscriptionPage';
+import LandingPage from './components/LandingPage';
+import Navbar from './components/header/Navbar';
+import TranscriptionPage from './components/TranscriptionPage';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
-import Footer from './components/Footer';
+import Footer from './components/footer/Footer';
 import './app.scss';
-import './reset.scss';
+import './styles/reset.scss';
 
 const App: React.FC = () => {
   return (

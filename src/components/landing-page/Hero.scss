@@ -1,0 +1,44 @@
+@import '../../styles/colors';
+@import '../../styles/variables';
+
+.ipa__landing-page__hero {
+  background: linear-gradient(
+    to left bottom,
+    $darkgray-gradient,
+    $lightgray-gradient
+  );
+
+  padding-top: 70px + $navbar-height;
+  padding-bottom: 90px;
+
+  @extend %side-padding;
+}
+
+.ipa__landing-page__hero__title {
+  color: $primary;
+  text-align: center;
+  font-size: 72px;
+  font-weight: 700;
+  @media screen and (max-width: 800px) {
+    font-size: 60px;
+  }
+  transition: all 0.3s ease-in-out;
+}
+
+.ipa__landing-page__hero__subtitle {
+  margin-top: 5px;
+
+  color: $offwhite;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 200;
+}
+
+.ipa__landing-page__hero__call-to-action {
+  margin-top: 60px;
+
+  color: $offwhite;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 300;
+}

@@ -121,12 +121,12 @@ const TranscriptionPage: React.FC<RouteComponentProps<Props>> = ({
           <p className='ipa__transcription__note' style={{ marginTop: 10 }}>
             Open IPA is a new service, so our database of exceptions is limited.
             If you find a transcription error or exception, please reach out to
+            us on Reddit at
             <a
-              href={`mailto:henryfellerhoff+openipa@gmail.com?subject=Feedback for Open IPA`}
+              href='https://www.reddit.com/r/openipa/'
+              target='_blank noopener noreferrer'
             >
-              <span className='ipa__transcription__email'>
-                henryfellerhoff@gmail.com.
-              </span>
+              <span className='ipa__transcription__email'>/r/openipa.</span>
             </a>
           </p>
           {getSpecificElements()}

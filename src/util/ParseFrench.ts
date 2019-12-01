@@ -84,7 +84,7 @@ const parseFrench = (
 
     let nextlettersixth = '';
     if (index < charArray.length - 6) {
-      nextletterfifth = charArray[index + 6];
+      nextlettersixth = charArray[index + 6];
     }
 
     switch (letter) {
@@ -231,7 +231,6 @@ const parseFrench = (
           nextlettersecond === 's' &&
           nextletterthird === 't'
         ) {
-          console.log(previousPhoneme);
           phoneme = {
             text: 'rest',
             ipa: IPA.FLIPPED_R + IPA.OPEN_E + IPA.S + IPA.T,
@@ -262,7 +261,6 @@ const parseFrench = (
             (nextlettersecond === 'm' && !isNasalCanceling(nextletterthird))
           )
         ) {
-          console.log(previousPhoneme);
           phoneme = {
             text: 're',
             ipa: IPA.FLIPPED_R + IPA.SCHWA,
@@ -667,23 +665,8 @@ const parseFrench = (
 
       // VOWELS
       case 'a':
-        if (
-          isGlideFollowing(
-            letter,
-            nextLetter,
-            nextlettersecond,
-            nextletterthird,
-            nextletterfourth
-          )
-        ) {
-          phoneme = {
-            text: 'a',
-            ipa: IPA.BRIGHT_A,
-            rule: Rules.SINGLE_A + Notes.GLIDE_FOLLOWING,
-          };
-        }
         // -aim and -ain nasal
-        else if (
+        if (
           nextLetter === 'i' &&
           (nextlettersecond === 'm' || nextlettersecond === 'n') &&
           ((isConsonant(nextletterthird) &&
@@ -719,6 +702,7 @@ const parseFrench = (
           };
           indexToAdd = 1;
         }
+
         // Final -aient verb
         else if (
           nextLetter === 'i' &&
@@ -733,6 +717,20 @@ const parseFrench = (
             rule: Rules.FINAL_VERB_AIENT,
           };
           indexToAdd = 4;
+        } else if (
+          isGlideFollowing(
+            letter,
+            nextLetter,
+            nextlettersecond,
+            nextletterthird,
+            nextletterfourth
+          )
+        ) {
+          phoneme = {
+            text: 'a',
+            ipa: IPA.BRIGHT_A,
+            rule: Rules.SINGLE_A + Notes.GLIDE_FOLLOWING,
+          };
         } else if (nextLetter === 'i' && isEndOfSentence(nextlettersecond)) {
           phoneme = {
             text: 'ai',
@@ -1740,25 +1738,6 @@ const parseFrench = (
 
     index += indexToAdd;
 
-    // Analize final IPA syllable
-    // ex. Final open e is more closed
-    const previousSyllable =
-      currentWord.syllables[currentWord.syllables.length - 1];
-    if (previousSyllable && isEndOfSentence(nextLetter)) {
-      const previousIPA = previousSyllable.ipa[previousSyllable.ipa.length - 1];
-      if (previousIPA) {
-        if (previousIPA === IPA.OPEN_E) {
-          previousSyllable.rule += Notes.FINAL_E_HALFCLOSED;
-        }
-      }
-    } else if (isEndOfSentence(nextLetter)) {
-      if (phoneme.ipa[phoneme.ipa.length - 1]) {
-        if (phoneme.ipa[phoneme.ipa.length - 1] === IPA.OPEN_E) {
-          phoneme.rule += Notes.FINAL_E_HALFCLOSED;
-        }
-      }
-    }
-
     // Analyze Elision
     if (shouldAnalyzeElision) {
       if (
@@ -1779,7 +1758,6 @@ const parseFrench = (
       const lastCharacter = phoneme.text[phoneme.text.length - 1];
       const nextCharacter = charArray[index + indexToAdd];
       const nextCharacterSecond = charArray[index + indexToAdd + 1];
-      console.log(lastCharacter, nextLetter, nextlettersecond);
       if (
         !isPronouncedConsonant(lastCharacter, true) &&
         isConsonant(lastCharacter) &&
@@ -1806,6 +1784,34 @@ const parseFrench = (
 
     currentWord.syllables.push(phoneme);
     previousPhoneme = phoneme.ipa[phoneme.ipa.length - 1];
+
+    // Analize final IPA syllable
+    // ex. Final open e is more closed
+    let previousSyllable =
+      currentWord.syllables[currentWord.syllables.length - 1];
+    if (previousSyllable.ipa.length === 0) {
+      if (currentWord.syllables[currentWord.syllables.length - 2]) {
+        previousSyllable =
+          currentWord.syllables[currentWord.syllables.length - 2];
+      }
+    }
+    if (previousSyllable && isEndOfSentence(charArray[index + 1])) {
+      const previousIPA = previousSyllable.ipa[previousSyllable.ipa.length - 1];
+      if (previousIPA) {
+        if (previousIPA === IPA.OPEN_E) {
+          previousSyllable.ipa = IPA.CLOSED_E;
+          previousSyllable.rule += Notes.FINAL_E_HALFCLOSED;
+        }
+      }
+    }
+    // else if (isEndOfSentence(charArray[index + 1])) {
+    //   if (phoneme.ipa[phoneme.ipa.length - 1]) {
+    //     if (phoneme.ipa[phoneme.ipa.length - 1] === IPA.OPEN_E) {
+    //       phoneme.ipa = IPA.CLOSED_E;
+    //       phoneme.rule += Notes.FINAL_E_HALFCLOSED;
+    //     }
+    //   }
+    // }
 
     // Analyze vocalic harmonization
     if (

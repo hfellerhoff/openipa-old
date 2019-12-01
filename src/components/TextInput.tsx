@@ -25,24 +25,12 @@ const TextInput: React.FC<Props> = ({
   const { width } = useWindowDimensions();
   const className = `ipa__text-input--${theme}`;
   const isWidthSmallEnough = width <= 800 ? true : false;
-  let aghHeight = inputRef.scrollHeight;
-  if (displayHeight / 2.5 < inputRef.scrollHeight) {
-    aghHeight = displayHeight / 2.5;
-  }
-  const textareaHeight = isWidthSmallEnough ? aghHeight : displayHeight;
 
-  const visibleStyle: CSSProperties = {
-    height: textareaHeight,
-    visibility: 'visible',
+  const smallWidthHeight = 40 + inputRef.innerHTML.split('\n').length * 23.25;
+
+  const heightStyle: CSSProperties = {
+    height: isWidthSmallEnough ? smallWidthHeight : displayHeight,
   };
-
-  const hiddenStyle: CSSProperties = {
-    height: 0,
-    visibility: 'hidden',
-    margin: -250,
-  };
-
-  const style = isWidthSmallEnough && shouldHide ? hiddenStyle : visibleStyle;
 
   return (
     <textarea
@@ -53,7 +41,8 @@ const TextInput: React.FC<Props> = ({
       value={inputText}
       rows={0}
       className={className}
-      style={style}
+      hidden={isWidthSmallEnough ? shouldHide : false}
+      style={heightStyle}
       onChange={e => onChange(e)}
       ref={input => setInputRef(input ? input : inputRef)}
     />

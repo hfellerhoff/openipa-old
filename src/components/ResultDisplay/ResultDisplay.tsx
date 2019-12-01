@@ -109,16 +109,6 @@ const ResultElement = ({
 
   const { width } = useWindowDimensions();
   const isWidthSmallEnough = width <= 800 ? true : false;
-  const visibleStyle: CSSProperties = {
-    visibility: 'visible',
-  };
-  const hiddenStyle: CSSProperties = {
-    height: 0,
-    visibility: 'hidden',
-    margin: -150,
-  };
-
-  const style = isWidthSmallEnough && shouldHide ? hiddenStyle : visibleStyle;
 
   const lineElements: JSX.Element[] = [];
   result.lines.forEach((line, index) => {
@@ -131,7 +121,7 @@ const ResultElement = ({
   useEffect(() => {
     if (displayRef && setHeight) {
       const height = displayRef.offsetHeight;
-      setHeight(height);
+      if (height !== 0) setHeight(height);
     }
   }, [result, displayRef, setHeight]);
 
@@ -140,7 +130,7 @@ const ResultElement = ({
       id='result'
       className={className}
       ref={display => setDisplayRef(display ? display : displayRef)}
-      style={style}
+      hidden={isWidthSmallEnough ? shouldHide : false}
     >
       {lineElements}
     </div>

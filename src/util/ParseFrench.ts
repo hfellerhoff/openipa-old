@@ -126,17 +126,17 @@ const parseFrench = (text: string) => {
             ipa: IPA.FRICATIVE_G,
             rule: Rules.G_FRONTVOWEL,
           };
+        } else if (isBackVowel(nextLetter)) {
+          phoneme = {
+            text: 'g',
+            ipa: IPA.G,
+            rule: Rules.G_BACKVOWEL,
+          };
         } else if (isEndOfSentence(nextLetter)) {
           phoneme = {
             text: 'g',
             ipa: '',
             rule: Rules.SILENT_FINAL_CONSONANT,
-          };
-        } else {
-          phoneme = {
-            text: 'g',
-            ipa: IPA.G,
-            rule: Rules.G_BACKVOWEL,
           };
         }
         break;
@@ -329,6 +329,12 @@ const parseFrench = (text: string) => {
             rule: Rules.T,
           };
           indexToAdd = 1;
+        } else if (isEndOfSentence(nextLetter)) {
+          phoneme = {
+            text: 't',
+            ipa: '',
+            rule: Rules.SILENT_FINAL_CONSONANT,
+          };
         } else {
           phoneme = {
             text: 't',

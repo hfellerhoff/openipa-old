@@ -1787,31 +1787,26 @@ const parseFrench = (
 
     // Analize final IPA syllable
     // ex. Final open e is more closed
-    let previousSyllable =
-      currentWord.syllables[currentWord.syllables.length - 1];
-    if (previousSyllable.ipa.length === 0) {
-      if (currentWord.syllables[currentWord.syllables.length - 2]) {
-        previousSyllable =
-          currentWord.syllables[currentWord.syllables.length - 2];
+    if (phoneme.text !== 'est' && phoneme.text !== 'es') {
+      let previousSyllable =
+        currentWord.syllables[currentWord.syllables.length - 1];
+      if (previousSyllable.ipa.length === 0) {
+        if (currentWord.syllables[currentWord.syllables.length - 2]) {
+          previousSyllable =
+            currentWord.syllables[currentWord.syllables.length - 2];
+        }
       }
-    }
-    if (previousSyllable && isEndOfSentence(charArray[index + 1])) {
-      const previousIPA = previousSyllable.ipa[previousSyllable.ipa.length - 1];
-      if (previousIPA) {
-        if (previousIPA === IPA.OPEN_E) {
-          previousSyllable.ipa = IPA.CLOSED_E;
-          previousSyllable.rule += Notes.FINAL_E_HALFCLOSED;
+      if (previousSyllable && isEndOfSentence(charArray[index + 1])) {
+        const previousIPA =
+          previousSyllable.ipa[previousSyllable.ipa.length - 1];
+        if (previousIPA) {
+          if (previousIPA === IPA.OPEN_E) {
+            previousSyllable.ipa = IPA.CLOSED_E;
+            previousSyllable.rule += Notes.FINAL_E_HALFCLOSED;
+          }
         }
       }
     }
-    // else if (isEndOfSentence(charArray[index + 1])) {
-    //   if (phoneme.ipa[phoneme.ipa.length - 1]) {
-    //     if (phoneme.ipa[phoneme.ipa.length - 1] === IPA.OPEN_E) {
-    //       phoneme.ipa = IPA.CLOSED_E;
-    //       phoneme.rule += Notes.FINAL_E_HALFCLOSED;
-    //     }
-    //   }
-    // }
 
     // Analyze vocalic harmonization
     if (

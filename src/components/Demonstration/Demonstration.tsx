@@ -4,6 +4,7 @@ import TextInput from '../TextInput';
 import ResultDisplay from '../ResultDisplay/ResultDisplay';
 import './Demonstration.scss';
 import parseLatin from '../../util/ParseLatin';
+import { capitalizeFirstLetter } from '../../constants/StringHelper';
 
 interface Props {}
 
@@ -40,7 +41,7 @@ const Demonstration: React.FC<Props> = () => {
             displayHeight={resultHeight}
           />
           <h3 className='ipa__landing-page__demonstration__input-title'>
-            {`${language} Text Input`}
+            {`${capitalizeFirstLetter(language)} Text Input`}
           </h3>
         </div>
         <div className='ipa__landing-page__demonstration-container-right__container-right'>

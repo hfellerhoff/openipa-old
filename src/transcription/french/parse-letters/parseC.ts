@@ -1,70 +1,29 @@
-import {
-  ParseLetterProps,
-  ParseLetterReturn,
-} from '../../../constants/Interfaces';
+import { ParseLetterProps, Phoneme } from '../../../constants/Interfaces';
 import IPA from '../../../constants/IPA';
-import Rules from '../FrenchRules';
-import {
-  isFrontVowel,
-  isBackVowel,
-  isEndOfSentence,
-} from '../../../util/Helper';
+import transcribeLetter from '../parse-functions/transcribeLetter';
+import transcribeFollowingBackVowel from '../parse-functions/transcribeFollowingBackVowel';
+import transcribeFollowingFrontVowel from '../parse-functions/transcribeFollowingFrontVowel';
+import transcribeFinalConsonant from '../parse-functions/transcribeFinalConsonant';
+import transcribeFollowingLetter from '../parse-functions/transcribeFollowingLetter';
 
-const parseC = ({
-  phoneme,
-  indexToAdd,
-  nextletter,
-}: ParseLetterProps): ParseLetterReturn => {
-  // --- 'ç' ---
-  if (nextletter[0] === 'ç') {
-    return [
-      {
-        text: 'ç',
-        ipa: IPA.S,
-        rule: Rules.C_SQUIGLE,
-      },
-      0,
-    ];
-  }
+const parseC = ({ phoneme, nextletter }: ParseLetterProps): Phoneme => {
+  phoneme = transcribeFinalConsonant(phoneme, nextletter, IPA.K);
+  phoneme = transcribeFollowingFrontVowel(phoneme, nextletter, IPA.S);
+  phoneme = transcribeFollowingBackVowel(phoneme, nextletter, IPA.K);
 
   // --- 'ch' ---
-  if (nextletter[1] === 'h') {
-    return [
-      {
-        text: 'ch',
-        ipa: IPA.FRICATIVE_C,
-        rule: Rules.CH,
-      },
-      1,
-    ];
-  }
+  phoneme = transcribeFollowingLetter(
+    phoneme,
+    nextletter,
+    'h',
+    IPA.FRICATIVE_C
+  );
 
-  // --- C + Front Vowel ---
-  if (isFrontVowel(nextletter[1])) {
-    return [
-      {
-        text: 'c',
-        ipa: IPA.S,
-        rule: Rules.C_FRONTVOWEL,
-      },
-      0,
-    ];
-  }
-
-  // --- C + Back Vowel / Final C
-  if (isBackVowel(nextletter[1]) || isEndOfSentence(nextletter[1])) {
-    return [
-      {
-        text: 'c',
-        ipa: IPA.K,
-        rule: Rules.C_BACKVOWEL,
-      },
-      0,
-    ];
-  }
+  // --- 'ç' ---
+  phoneme = transcribeLetter(phoneme, nextletter, 'ç', IPA.S);
 
   // --- Default ---
-  return [phoneme, indexToAdd];
+  return phoneme;
 };
 
 export default parseC;

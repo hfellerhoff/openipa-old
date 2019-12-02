@@ -12,8 +12,23 @@ const ResultTemplate: Result = {
   ],
 };
 
+const getResultTemplate = () => {
+  return {
+    lines: [
+      {
+        words: [
+          {
+            syllables: [],
+          },
+        ],
+      },
+    ],
+  };
+};
+
 const Template = {
   Result: ResultTemplate,
+  getResultTemplate,
 };
 
 export default Template;

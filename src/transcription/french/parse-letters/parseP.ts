@@ -7,12 +7,12 @@ import IPA from '../../../constants/IPA';
 import { isEndOfSentence } from '../../../util/Helper';
 import { areNoMorePronouncedConsonants } from '../FrenchHelper';
 
-const parseZ = ({
+const parseP = ({
   nextletter,
   charArray,
   index,
 }: ParseLetterProps): ParseLetterReturn => {
-  // --- Final Z ---
+  // --- Final P ---
   if (isEndOfSentence(nextletter[1])) {
     return [
       {
@@ -36,15 +36,27 @@ const parseZ = ({
     ];
   }
 
+  // --- Double P ---
+  if (nextletter[1] === nextletter[0]) {
+    return [
+      {
+        text: nextletter[0] + nextletter[1],
+        ipa: IPA.P,
+        rule: Rules.P,
+      },
+      1,
+    ];
+  }
+
   // --- Default ---
   return [
     {
       text: nextletter[0],
-      ipa: IPA.Z,
-      rule: Rules.Z,
+      ipa: IPA.P,
+      rule: Rules.P,
     },
     0,
   ];
 };
 
-export default parseZ;
+export default parseP;

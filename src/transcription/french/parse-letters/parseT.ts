@@ -4,40 +4,58 @@ import {
 } from '../../../constants/Interfaces';
 import Rules from '../FrenchRules';
 import IPA from '../../../constants/IPA';
-import { isEndOfSentence, isVowel } from '../../../util/Helper';
+import { isEndOfSentence } from '../../../util/Helper';
 import { areNoMorePronouncedConsonants } from '../FrenchHelper';
 
-const parseS = ({
+const parseT = ({
   nextletter,
-  previousIPA,
   charArray,
   index,
 }: ParseLetterProps): ParseLetterReturn => {
-  // --- Intervocalic S ---
-  if (isVowel(previousIPA) && isVowel(nextletter[1])) {
+  // --- t + ion/iel/ieux ---
+  if (
+    (nextletter[1] + nextletter[2] + nextletter[3] === 'ion' &&
+      isEndOfSentence(nextletter[4])) ||
+    (nextletter[1] + nextletter[2] + nextletter[3] === 'iel' &&
+      isEndOfSentence(nextletter[4])) ||
+    (nextletter[1] + nextletter[2] + nextletter[3] + nextletter[4] === 'ieux' &&
+      isEndOfSentence(nextletter[5]))
+  ) {
     return [
       {
-        text: nextletter[0],
-        ipa: IPA.Z,
-        rule: Rules.INTERVOCALIC_S,
+        text: 't',
+        ipa: IPA.S,
+        rule: Rules.FINAL_TION,
       },
       0,
     ];
   }
 
-  // --- Double S ---
-  if (nextletter[1] === nextletter[0]) {
+  // --- th ---
+  if (nextletter[1] === 'h') {
     return [
       {
-        text: nextletter[0] + nextletter[1],
-        ipa: IPA.S,
-        rule: Rules.S,
+        text: 'th',
+        ipa: IPA.T,
+        rule: Rules.TH,
       },
       1,
     ];
   }
 
-  // --- Final S ---
+  // --- Double T ---
+  if (nextletter[1] === 't') {
+    return [
+      {
+        text: 'tt',
+        ipa: IPA.T,
+        rule: Rules.T,
+      },
+      1,
+    ];
+  }
+
+  // --- Final T ---
   if (isEndOfSentence(nextletter[1])) {
     return [
       {
@@ -64,12 +82,12 @@ const parseS = ({
   // --- Default ---
   return [
     {
-      text: nextletter[0],
-      ipa: IPA.S,
-      rule: Rules.S,
+      text: 't',
+      ipa: IPA.T,
+      rule: Rules.T,
     },
     0,
   ];
 };
 
-export default parseS;
+export default parseT;

@@ -4,40 +4,15 @@ import {
 } from '../../../constants/Interfaces';
 import Rules from '../FrenchRules';
 import IPA from '../../../constants/IPA';
-import { isEndOfSentence, isVowel } from '../../../util/Helper';
+import { isEndOfSentence } from '../../../util/Helper';
 import { areNoMorePronouncedConsonants } from '../FrenchHelper';
 
-const parseS = ({
+const parseX = ({
   nextletter,
-  previousIPA,
   charArray,
   index,
 }: ParseLetterProps): ParseLetterReturn => {
-  // --- Intervocalic S ---
-  if (isVowel(previousIPA) && isVowel(nextletter[1])) {
-    return [
-      {
-        text: nextletter[0],
-        ipa: IPA.Z,
-        rule: Rules.INTERVOCALIC_S,
-      },
-      0,
-    ];
-  }
-
-  // --- Double S ---
-  if (nextletter[1] === nextletter[0]) {
-    return [
-      {
-        text: nextletter[0] + nextletter[1],
-        ipa: IPA.S,
-        rule: Rules.S,
-      },
-      1,
-    ];
-  }
-
-  // --- Final S ---
+  // --- Final X ---
   if (isEndOfSentence(nextletter[1])) {
     return [
       {
@@ -65,11 +40,11 @@ const parseS = ({
   return [
     {
       text: nextletter[0],
-      ipa: IPA.S,
-      rule: Rules.S,
+      ipa: IPA.Z,
+      rule: Rules.Z,
     },
     0,
   ];
 };
 
-export default parseS;
+export default parseX;

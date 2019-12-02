@@ -23,6 +23,8 @@ import parseH from './parse-letters/parseH';
 import parseJ from './parse-letters/parseJ';
 import parseQ from './parse-letters/parseQ';
 import parseR from './parse-letters/parseR';
+import parseS from './parse-letters/parseS';
+import parseZ from './parse-letters/parseR';
 
 const parseFrench = (
   text: string,
@@ -128,58 +130,10 @@ const parseFrench = (
         [phoneme, indexToAdd] = parseR(parseProps);
         break;
       case 'z':
-        phoneme = {
-          text: 'z',
-          ipa: IPA.Z,
-          rule: Rules.Z,
-        };
-        if (isEndOfSentence(nextLetter)) {
-          phoneme = {
-            text: 'z',
-            ipa: '',
-            rule: Rules.SILENT_FINAL_CONSONANT,
-          };
-        } else if (areNoMorePronouncedConsonants(charArray, index)) {
-          phoneme = {
-            text: letter,
-            ipa: '',
-            rule: Rules.SILENT_FINAL_CONSONANT,
-          };
-        }
+        [phoneme, indexToAdd] = parseZ(parseProps);
         break;
       case 's':
-        if (isVowel(previousPhoneme) && isVowel(nextLetter)) {
-          phoneme = {
-            text: 's',
-            ipa: IPA.Z,
-            rule: Rules.INTERVOCALIC_S,
-          };
-        } else if (nextLetter === 's') {
-          phoneme = {
-            text: 'ss',
-            ipa: IPA.S,
-            rule: Rules.S,
-          };
-          indexToAdd = 1;
-        } else if (isEndOfSentence(nextLetter)) {
-          phoneme = {
-            text: 's',
-            ipa: '',
-            rule: Rules.SILENT_FINAL_CONSONANT,
-          };
-        } else if (areNoMorePronouncedConsonants(charArray, index)) {
-          phoneme = {
-            text: letter,
-            ipa: '',
-            rule: Rules.SILENT_FINAL_CONSONANT,
-          };
-        } else {
-          phoneme = {
-            text: 's',
-            ipa: IPA.S,
-            rule: Rules.S,
-          };
-        }
+        [phoneme, indexToAdd] = parseS(parseProps);
         break;
       case 't':
         if (

@@ -83,17 +83,15 @@ const parseFrench = (
       case 'c':
       case 'ç':
         phoneme = parseC(parseProps);
-        indexToAdd = phoneme.text.length - 1;
         break;
       case 'g':
         phoneme = parseG(parseProps);
-        indexToAdd = phoneme.text.length - 1;
         break;
       case 'h':
-        [phoneme, indexToAdd] = parseH(parseProps);
+        phoneme = parseH(parseProps);
         break;
       case 'j':
-        [phoneme, indexToAdd] = parseJ(parseProps);
+        phoneme = parseJ(parseProps);
         break;
       case 'q':
         [phoneme, indexToAdd] = parseQ(parseProps);
@@ -1360,6 +1358,7 @@ const parseFrench = (
         startOfNewWord = true;
         break;
     }
+    indexToAdd = phoneme.text.length - 1;
 
     const currentLine = result.lines[result.lines.length - 1];
     const currentWord = currentLine.words[currentLine.words.length - 1];

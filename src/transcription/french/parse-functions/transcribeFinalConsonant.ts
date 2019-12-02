@@ -18,7 +18,10 @@ const transcribeFinalConsonant = (
   letters: string[],
   ipa?: IPA
 ): Phoneme => {
-  if (isPronouncedConsonant(letters[0], isEndOfSentence(letters[1]))) {
+  if (
+    isPronouncedConsonant(letters[0], isEndOfSentence(letters[1])) &&
+    isEndOfSentence(letters[1])
+  ) {
     return {
       text: letters[0],
       ipa: ipa ? ipa : '',

@@ -7,6 +7,7 @@ import transcribeFinalConsonant from '../parse-functions/transcribeFinalConsonan
 import transcribeFollowingLetter from '../parse-functions/transcribeFollowingLetter';
 
 const parseG = ({ phoneme, nextletter }: ParseLetterProps): Phoneme => {
+  phoneme = transcribeDoubleLetter(phoneme, nextletter);
   phoneme = transcribeFinalConsonant(phoneme, nextletter);
   phoneme = transcribeFollowingFrontVowel(phoneme, nextletter, IPA.FRICATIVE_G);
   phoneme = transcribeFollowingBackVowel(phoneme, nextletter, IPA.G);
@@ -21,8 +22,6 @@ const parseG = ({ phoneme, nextletter }: ParseLetterProps): Phoneme => {
 
   // --- 'gu' ---
   phoneme = transcribeFollowingLetter(phoneme, nextletter, 'u', IPA.G);
-
-  phoneme = transcribeDoubleLetter(phoneme, nextletter);
 
   return phoneme;
 };

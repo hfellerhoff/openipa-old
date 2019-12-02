@@ -94,7 +94,7 @@ const parseFrench = (
         phoneme = parseJ(parseProps);
         break;
       case 'q':
-        [phoneme, indexToAdd] = parseQ(parseProps);
+        phoneme = parseQ(parseProps);
         break;
       case 'r':
         [phoneme, indexToAdd] = parseR(parseProps);

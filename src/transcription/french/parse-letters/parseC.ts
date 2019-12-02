@@ -1,5 +1,6 @@
 import { ParseLetterProps, Phoneme } from '../../../constants/Interfaces';
 import IPA from '../../../constants/IPA';
+import transcribeDefault from '../parse-functions/transcribeDefault';
 import transcribeLetter from '../parse-functions/transcribeLetter';
 import transcribeFollowingBackVowel from '../parse-functions/transcribeFollowingBackVowel';
 import transcribeFollowingFrontVowel from '../parse-functions/transcribeFollowingFrontVowel';
@@ -7,6 +8,7 @@ import transcribeFinalConsonant from '../parse-functions/transcribeFinalConsonan
 import transcribeFollowingLetter from '../parse-functions/transcribeFollowingLetter';
 
 const parseC = ({ phoneme, nextletter }: ParseLetterProps): Phoneme => {
+  phoneme = transcribeDefault(nextletter, IPA.K);
   phoneme = transcribeFinalConsonant(phoneme, nextletter, IPA.K);
   phoneme = transcribeFollowingFrontVowel(phoneme, nextletter, IPA.S);
   phoneme = transcribeFollowingBackVowel(phoneme, nextletter, IPA.K);

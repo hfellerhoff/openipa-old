@@ -11,15 +11,13 @@ import { Result, Phoneme, ParseLetterProps } from '../../constants/Interfaces';
 import Rules from './FrenchRules';
 import Exceptions from './FrenchExceptions';
 import Notes from './FrenchNotes';
-import {
-  isPronouncedConsonant,
-  isGlideFollowing,
-  isNasalCanceling,
-  areNoMorePronouncedConsonants,
-} from './FrenchHelper';
+import { isPronouncedConsonant } from './FrenchHelper';
 import Template from '../../constants/Template';
+import parseA from './parse-letters/parseA';
 import parseB from './parse-letters/parseB';
 import parseC from './parse-letters/parseC';
+import parseD from './parse-letters/parseD';
+import parseE from './parse-letters/parseE';
 import parseF from './parse-letters/parseF';
 import parseG from './parse-letters/parseG';
 import parseH from './parse-letters/parseH';
@@ -35,14 +33,11 @@ import parseQ from './parse-letters/parseQ';
 import parseR from './parse-letters/parseR';
 import parseS from './parse-letters/parseS';
 import parseT from './parse-letters/parseT';
+import parseU from './parse-letters/parseU';
 import parseV from './parse-letters/parseV';
 import parseX from './parse-letters/parseX';
-import parseZ from './parse-letters/parseZ';
-import parseD from './parse-letters/parseD';
-import parseA from './parse-letters/parseA';
-import parseE from './parse-letters/parseE';
 import parseY from './parse-letters/parseY';
-import parseU from './parse-letters/parseU';
+import parseZ from './parse-letters/parseZ';
 
 const parseFrench = (
   text: string,

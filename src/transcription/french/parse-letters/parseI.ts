@@ -1,9 +1,6 @@
 import { ParseLetterProps, Phoneme } from '../../../constants/Interfaces';
 import IPA from '../../../constants/IPA';
 import Rules from '../FrenchRules';
-import transcribeFinalConsonant from '../parse-functions/transcribeFinalConsonant';
-import transcribeDefault from '../parse-functions/transcribeDefault';
-import transcribeDoubleLetter from '../parse-functions/transcribeDoubleLetter';
 import { isEndOfSentence, isConsonant, isVowel } from '../../../util/Helper';
 import { isNasalCanceling } from '../FrenchHelper';
 import transcribeLetter from '../parse-functions/transcribeLetter';

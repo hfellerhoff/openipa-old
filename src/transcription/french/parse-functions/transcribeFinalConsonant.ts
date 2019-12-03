@@ -4,7 +4,6 @@ import {
   areNoMorePronouncedConsonants,
   isPronouncedConsonant,
 } from '../FrenchHelper';
-import IPA from '../../../constants/IPA';
 
 const getRulePronounced = (letter: string, ipa: string): string => {
   return `Final 'c', 'r', 'f', and 'l' consonants are pronounced. '${letter}' consonants are transcribed as [${ipa}].`;

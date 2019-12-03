@@ -1,7 +1,7 @@
 import { Phoneme } from '../../../constants/Interfaces';
 
 const getRule = (text: string, ipa: string): string => {
-  return `If no other transcription rule applies, '${text}' letters are transcribed as [${ipa}].`;
+  return `By default, '${text}' letters are transcribed as [${ipa}].`;
 };
 
 const transcribeDefault = (letters: string[], ipa: string): Phoneme => {

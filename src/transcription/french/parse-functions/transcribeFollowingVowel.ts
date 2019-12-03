@@ -1,16 +1,16 @@
 import { Phoneme } from '../../../constants/Interfaces';
-import { isFrontVowel } from '../../../util/Helper';
+import { isVowel } from '../../../util/Helper';
 
 const getRule = (letter: string, ipa: string): string => {
-  return `'${letter}' consonants followed by a front vowel are transcribed as [${ipa}].`;
+  return `'${letter}' consonants followed by a vowel are transcribed as [${ipa}].`;
 };
 
-const transcribeFollowingFrontVowel = (
+const transcribeFollowingVowel = (
   phoneme: Phoneme,
   letters: string[],
   ipa: string
 ): Phoneme => {
-  if (isFrontVowel(letters[1])) {
+  if (isVowel(letters[1])) {
     return {
       text: letters[0],
       ipa,
@@ -20,4 +20,4 @@ const transcribeFollowingFrontVowel = (
   return phoneme;
 };
 
-export default transcribeFollowingFrontVowel;
+export default transcribeFollowingVowel;

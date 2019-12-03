@@ -7,7 +7,7 @@ const parseQ = ({ nextletter, phoneme }: ParseLetterProps): Phoneme => {
   phoneme = transcribeFinalConsonant(phoneme, nextletter);
 
   // --- 'qu' ---
-  phoneme = transcribeFollowingLetter(phoneme, nextletter, 'u', IPA.K);
+  phoneme = transcribeFollowingLetter(phoneme, nextletter, ['u'], IPA.K);
 
   // --- Default ---
   return phoneme;

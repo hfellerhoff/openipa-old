@@ -6,9 +6,11 @@ import transcribeFollowingBackVowel from '../parse-functions/transcribeFollowing
 import transcribeFollowingFrontVowel from '../parse-functions/transcribeFollowingFrontVowel';
 import transcribeFinalConsonant from '../parse-functions/transcribeFinalConsonant';
 import transcribeFollowingLetter from '../parse-functions/transcribeFollowingLetter';
+import transcribeDoubleLetter from '../parse-functions/transcribeDoubleLetter';
 
 const parseC = ({ phoneme, nextletter }: ParseLetterProps): Phoneme => {
   phoneme = transcribeDefault(nextletter, IPA.K);
+  phoneme = transcribeDoubleLetter(phoneme, nextletter, IPA.K);
   phoneme = transcribeFinalConsonant(phoneme, nextletter, IPA.K);
   phoneme = transcribeFollowingFrontVowel(phoneme, nextletter, IPA.S);
   phoneme = transcribeFollowingBackVowel(phoneme, nextletter, IPA.K);
@@ -17,7 +19,7 @@ const parseC = ({ phoneme, nextletter }: ParseLetterProps): Phoneme => {
   phoneme = transcribeFollowingLetter(
     phoneme,
     nextletter,
-    'h',
+    ['h'],
     IPA.FRICATIVE_C
   );
 

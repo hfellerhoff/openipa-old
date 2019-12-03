@@ -109,7 +109,7 @@ const Rules = {
   NASAL_OIN: `'oin' letter clusters that are final or followed by a consonant are transcribed as [${IPA.W_GLIDE +
     IPA.NASAL_E}]`,
   NASAL_UMN: `'um' and 'un' letter groups that are final or followed by a consonant (except m, n, and h) are transcribed as [${IPA.NASAL_MIXED_O}].`,
-  DEFAULT_E: `If no other rule applies, transcribe 'e' vowels as [${IPA.SCHWA}].`,
+  DEFAULT_E: `If no other rule applies, transcribe 'e' vowels as [${IPA.OPEN_E}].`,
   FINAL_ENT: `Final '-ent' verb endings are transcribed as [${IPA.SCHWA}]. If this is not a verb, it should be transcribed as [${IPA.NASAL_A}].`,
   ELISION: `The normally transcribed [${IPA.SCHWA}] is dropped in this case due to elision, as the following word begins with a vowel. Consult your music to confirm if the schwa should not be pronounced.`,
   S_LIASON: `This normally silent 's' is pronounced as a [${IPA.Z}] in this case due to liason, as the following word begins with a vowel. Liason rules are complex, so take this transcription with a grain of salt.`,

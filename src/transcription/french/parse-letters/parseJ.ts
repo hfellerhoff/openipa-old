@@ -1,10 +1,10 @@
 import { ParseLetterProps, Phoneme } from '../../../constants/Interfaces';
 import IPA from '../../../constants/IPA';
 import transcribeFinalConsonant from '../parse-functions/transcribeFinalConsonant';
-import transcribeLetter from '../parse-functions/transcribeLetter';
+import transcribeDefault from '../parse-functions/transcribeDefault';
 
 const parseJ = ({ phoneme, nextletter }: ParseLetterProps): Phoneme => {
-  phoneme = transcribeLetter(phoneme, nextletter, 'j', IPA.FRICATIVE_G);
+  phoneme = transcribeDefault(nextletter, IPA.FRICATIVE_G);
   phoneme = transcribeFinalConsonant(phoneme, nextletter);
 
   return phoneme;

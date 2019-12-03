@@ -1,5 +1,4 @@
 import { Phoneme } from '../../../constants/Interfaces';
-import IPA from '../../../constants/IPA';
 
 const getRule = (text: string, ipa: string): string => {
   return `'${text}' letters are transcribed as [${ipa}].`;

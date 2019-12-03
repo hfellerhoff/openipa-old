@@ -53,7 +53,7 @@ const TranscriptionDescription: React.FC<Props> = ({
                   setIsChecked={setShouldAnalyzeLiason}
                 />
                 <h5 className='ipa__transcription__option-title'>
-                  Analyze Liason (Beta)
+                  Analyze Liason
                 </h5>
               </div>
             </div>

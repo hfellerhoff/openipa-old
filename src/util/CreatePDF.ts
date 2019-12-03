@@ -86,6 +86,7 @@ const createPDFFromResult = async (language: Languages, result: Result) => {
             ipaWord = ipaWord.substring(1, ipaWord.length);
         }
 
+        // TODO: This nightmare
         if (ipaWord.indexOf(IPA.UNDERTIE) >= 0) {
           // ipaWord = ipaWord.split(IPA.UNDERTIE)[0];
           // ctx.arc(

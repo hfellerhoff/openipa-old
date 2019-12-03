@@ -57,10 +57,12 @@ const createPDFFromResult = async (language: Languages, result: Result) => {
 
     let newLine = true;
     result.lines.forEach(line => {
+      let liasonLetter = '';
       line.words.forEach(word => {
         let textWord = '';
         let ipaWord = '';
-        word.syllables.forEach(syllable => {
+
+        word.syllables.forEach((syllable, index) => {
           if (syllable.text !== '\n') {
             textWord += syllable.text;
             ipaWord += syllable.ipa;
@@ -86,27 +88,21 @@ const createPDFFromResult = async (language: Languages, result: Result) => {
             ipaWord = ipaWord.substring(1, ipaWord.length);
         }
 
-        // TODO: This nightmare
+        // Add Liason letter to following word and format spaces
+        if (liasonLetter !== '') {
+          while (ipaWord[0] === ' ') {
+            ipaWord = ipaWord.substring(1, ipaWord.length);
+          }
+          if (textWord[0] === ' ') ipaWord = ' ' + liasonLetter + ipaWord;
+          else ipaWord = liasonLetter + ipaWord;
+          console.log(textWord, ipaWord);
+          liasonLetter = '';
+        }
+
+        // Detect Liason
         if (ipaWord.indexOf(IPA.UNDERTIE) >= 0) {
-          // ipaWord = ipaWord.split(IPA.UNDERTIE)[0];
-          // ctx.arc(
-          //   x + textWidth + 1,
-          //   y + textWidth - ipaWidth + 2,
-          //   (textWidth - ipaWidth + 2) * 2,
-          //   Math.PI * 0.33,
-          //   Math.PI * 0.66,
-          //   false
-          // );
-          // ctx.stroke();
-          // ctx.bezierCurveTo(
-          //   x + ipaWidth,
-          //   y + ipaLineSpacing,
-          //   x + textWidth,
-          //   y + ipaLineSpacing + 1,
-          //   x + textWidth + 2,
-          //   y + ipaLineSpacing
-          // );
-          // ctx.stroke();
+          liasonLetter = ipaWord.charAt(ipaWord.length - 2);
+          ipaWord = ipaWord.substring(0, ipaWord.length - 2);
         }
 
         pdf.setFontSize(14);

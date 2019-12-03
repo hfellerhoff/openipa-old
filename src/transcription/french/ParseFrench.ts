@@ -270,7 +270,6 @@ const parseFrench = (
       const lastCharacter = phoneme.text[phoneme.text.length - 1];
       const nextCharacter = charArray[index + 1];
       const nextCharacterSecond = charArray[index + 2];
-      console.log(lastCharacter, nextCharacter, nextCharacterSecond);
       if (
         !isPronouncedConsonant(lastCharacter, true) &&
         isConsonant(lastCharacter) &&

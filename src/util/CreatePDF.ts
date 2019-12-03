@@ -5,10 +5,12 @@ import TrebuchetMS from '../constants/fonts/trebuchet-ms-normal';
 import TrebuchetMSBold from '../constants/fonts/trebuchet-ms-bold';
 import imageData from '../assets/logo_bw';
 import { capitalizeFirstLetter } from './StringHelper';
+import IPA from '../constants/IPA';
 
 const createPDFFromResult = async (language: Languages, result: Result) => {
   return new Promise(resolve => {
     const pdf = new jsPDF();
+    const ctx = pdf.context2d;
     const footerY = 285;
     const maxY = footerY - 20;
     const maxX = 165;
@@ -82,6 +84,28 @@ const createPDFFromResult = async (language: Languages, result: Result) => {
             textWord = textWord.substring(1, textWord.length);
           if (ipaWord[0] === ' ')
             ipaWord = ipaWord.substring(1, ipaWord.length);
+        }
+
+        if (ipaWord.indexOf(IPA.UNDERTIE) >= 0) {
+          // ipaWord = ipaWord.split(IPA.UNDERTIE)[0];
+          // ctx.arc(
+          //   x + textWidth + 1,
+          //   y + textWidth - ipaWidth + 2,
+          //   (textWidth - ipaWidth + 2) * 2,
+          //   Math.PI * 0.33,
+          //   Math.PI * 0.66,
+          //   false
+          // );
+          // ctx.stroke();
+          // ctx.bezierCurveTo(
+          //   x + ipaWidth,
+          //   y + ipaLineSpacing,
+          //   x + textWidth,
+          //   y + ipaLineSpacing + 1,
+          //   x + textWidth + 2,
+          //   y + ipaLineSpacing
+          // );
+          // ctx.stroke();
         }
 
         pdf.setFontSize(14);

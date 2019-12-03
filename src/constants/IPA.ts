@@ -44,6 +44,7 @@ enum IPA {
   FRICATIVE_G = 'ʒ',
   BACK_SWOOP_N = 'ɲ',
   FRONT_SWOOP_N = 'ŋ',
+  UNDERTIE = '‿',
 }
 
 export default IPA;

@@ -4,6 +4,7 @@ import { Word, Line, Result } from '../../constants/Interfaces';
 
 import './ResultDisplay.scss';
 import useWindowDimensions from '../../hooks/UseWindowDimensions';
+import IPA from '../../constants/IPA';
 
 type PhonemeProps = {
   text: string;
@@ -11,6 +12,7 @@ type PhonemeProps = {
   isIPA: boolean;
   theme: 'light' | 'dark';
 };
+
 const PhonemeElement = ({ text, rule, isIPA, theme }: PhonemeProps) => {
   const textClassName = `ipa__result-display-text--${theme}`;
   const tooltipClassName = `ipa__result-tooltip ipa__result-tooltip--${theme}`;
@@ -80,11 +82,17 @@ const LineElement = ({ line, theme }: LineProps) => {
   const wordElements: JSX.Element[] = [];
   line.words.forEach((word, index) => {
     const wordElement = <WordElement word={word} key={index} theme={theme} />;
+    let foundUndertie = false;
+    word.syllables.forEach(syllable => {
+      if (syllable.ipa.indexOf(IPA.UNDERTIE) >= 0) {
+        foundUndertie = true;
+      }
+    });
     const spaceElement = (
       <span style={{ margin: '0px 5px' }} key={(index + 0.5).toString()}></span>
     );
     wordElements.push(wordElement);
-    wordElements.push(spaceElement);
+    if (!foundUndertie) wordElements.push(spaceElement);
   });
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>{wordElements}</div>

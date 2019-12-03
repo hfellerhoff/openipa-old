@@ -68,18 +68,12 @@ const parseFrench = (
       letters away from the current
       letter.
     */
-    let nextletter = [
-      charArray[index],
-      charArray[index + 1],
-      charArray[index + 2],
-      charArray[index + 3],
-      charArray[index + 4],
-      charArray[index + 5],
-      charArray[index + 6],
-      charArray[index + 7],
-      charArray[index + 8],
-      charArray[index + 9],
-    ];
+    let nextletter = [];
+
+    // Do not transcribe '
+    for (let i = 0; i < 10; i++) {
+      if (charArray[index + i] !== "'") nextletter.push(charArray[index + i]);
+    }
 
     const parseProps: ParseLetterProps = {
       phoneme,
@@ -270,30 +264,33 @@ const parseFrench = (
       }
     }
 
+    let liasonPhoneme;
     // Analyze Liason
     if (shouldAnalyzeLiason) {
       const lastCharacter = phoneme.text[phoneme.text.length - 1];
-      const nextCharacter = charArray[index + indexToAdd];
-      const nextCharacterSecond = charArray[index + indexToAdd + 1];
+      const nextCharacter = charArray[index + 1];
+      const nextCharacterSecond = charArray[index + 2];
+      console.log(lastCharacter, nextCharacter, nextCharacterSecond);
       if (
         !isPronouncedConsonant(lastCharacter, true) &&
         isConsonant(lastCharacter) &&
+        lastCharacter !== 's' &&
         isEndOfSentence(nextCharacter) &&
         isVowel(nextCharacterSecond)
       ) {
-        phoneme = {
-          text: phoneme.text,
-          ipa: phoneme.ipa + lastCharacter,
+        liasonPhoneme = {
+          text: ' ',
+          ipa: lastCharacter + IPA.UNDERTIE,
           rule: phoneme.rule + Notes.LIASON,
         };
       } else if (
         lastCharacter === 's' &&
-        isEndOfSentence(nextletter[1]) &&
-        isVowel(nextletter[2])
+        isEndOfSentence(nextCharacter) &&
+        isVowel(nextCharacterSecond)
       ) {
-        phoneme = {
-          text: phoneme.text,
-          ipa: phoneme.ipa + IPA.Z,
+        liasonPhoneme = {
+          text: ' ',
+          ipa: IPA.Z + IPA.UNDERTIE,
           rule: Rules.S_LIASON,
         };
       }
@@ -301,6 +298,11 @@ const parseFrench = (
 
     currentWord.syllables.push(phoneme);
     previousPhoneme = phoneme.ipa[phoneme.ipa.length - 1];
+
+    if (liasonPhoneme !== undefined) {
+      currentWord.syllables.push(liasonPhoneme);
+      previousPhoneme = liasonPhoneme.ipa[liasonPhoneme.ipa.length - 1];
+    }
 
     // Analize final IPA syllable
     // ex. Final open e is more closed

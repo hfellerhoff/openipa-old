@@ -251,16 +251,18 @@ const parseFrench = (
 
     // Analyze Elision
     if (shouldAnalyzeElision) {
-      if (
-        phoneme.ipa === IPA.SCHWA &&
-        isEndOfSentence(nextletter[1]) &&
-        isVowel(nextletter[2])
-      ) {
-        phoneme = {
-          ...phoneme,
-          ipa: '',
-          rule: Rules.ELISION,
-        };
+      if (nextletter[1] !== '\n') {
+        if (
+          phoneme.ipa === IPA.SCHWA &&
+          isEndOfSentence(nextletter[1]) &&
+          isVowel(nextletter[2])
+        ) {
+          phoneme = {
+            ...phoneme,
+            ipa: '',
+            rule: Rules.ELISION,
+          };
+        }
       }
     }
 
@@ -270,28 +272,30 @@ const parseFrench = (
       const lastCharacter = phoneme.text[phoneme.text.length - 1];
       const nextCharacter = charArray[index + 1];
       const nextCharacterSecond = charArray[index + 2];
-      if (
-        !isPronouncedConsonant(lastCharacter, true) &&
-        isConsonant(lastCharacter) &&
-        lastCharacter !== 's' &&
-        isEndOfSentence(nextCharacter) &&
-        isVowel(nextCharacterSecond)
-      ) {
-        liasonPhoneme = {
-          text: ' ',
-          ipa: lastCharacter + IPA.UNDERTIE,
-          rule: phoneme.rule + Notes.LIASON,
-        };
-      } else if (
-        lastCharacter === 's' &&
-        isEndOfSentence(nextCharacter) &&
-        isVowel(nextCharacterSecond)
-      ) {
-        liasonPhoneme = {
-          text: ' ',
-          ipa: IPA.Z + IPA.UNDERTIE,
-          rule: Rules.S_LIASON,
-        };
+      if (nextCharacter !== '\n') {
+        if (
+          !isPronouncedConsonant(lastCharacter, true) &&
+          isConsonant(lastCharacter) &&
+          lastCharacter !== 's' &&
+          isEndOfSentence(nextCharacter) &&
+          isVowel(nextCharacterSecond)
+        ) {
+          liasonPhoneme = {
+            text: ' ',
+            ipa: lastCharacter + IPA.UNDERTIE,
+            rule: phoneme.rule + Notes.LIASON,
+          };
+        } else if (
+          lastCharacter === 's' &&
+          isEndOfSentence(nextCharacter) &&
+          isVowel(nextCharacterSecond)
+        ) {
+          liasonPhoneme = {
+            text: ' ',
+            ipa: IPA.Z + IPA.UNDERTIE,
+            rule: Rules.S_LIASON,
+          };
+        }
       }
     }
 

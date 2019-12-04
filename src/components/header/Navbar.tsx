@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from '../../assets/logo.png';
 import './Navbar.scss';
 import { NavLink } from 'react-router-dom';
 
-interface Props {}
+interface Props {
+  location: string;
+}
 
-const Navbar: React.FC<Props> = () => {
+const Navbar: React.FC<Props> = ({ location }) => {
   const [navbarRef, setNavbarRef] = useState(document.createElement('div'));
 
-  window.onscroll = () => {
+  const checkForScroll = () => {
     if (window.pageYOffset > 0) {
       navbarRef.className = 'ipa__navbar ipa__navbar--scrolled';
     } else {
       navbarRef.className = 'ipa__navbar';
     }
   };
+
+  window.onscroll = checkForScroll;
+  useEffect(() => checkForScroll(), [location]);
 
   return (
     <div

@@ -20,7 +20,7 @@ const App = () => {
 
   return transitions.map(({ item: location, props, key }) => (
     <>
-      <Navbar />
+      <Navbar location={location} />
       <animated.div key={key} style={props}>
         <Switch location={location}>
           <Route default exact path='/' component={LandingPage} />

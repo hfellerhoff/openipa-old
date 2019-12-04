@@ -15,6 +15,10 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 60px;
+  @media screen and (max-width: 800px) {
+    margin-bottom: 20px;
+  }
+  transition: all 0.3s ease-in-out;
 }
 
 .ipa__support__hero-title {

@@ -69,7 +69,7 @@ const SupportPage: React.FC<Props> = () => {
           In order to ensure that Open IPA thrives and that development can continue,
           please consider supporting the project financially. Your support goes a long
           way towards ensuring that Open IPA stays up, stays accurate, and continues
-          helping transcribing into the future. If you would like to 
+          to help transcribe into the future. If you would like to 
           contribute, please:'
         >
           <CoffeeButton />

@@ -5,8 +5,6 @@ interface Props {
   title: string;
   description: string;
   position: 'left' | 'right';
-  otherHeight: number;
-  setHeight: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const SupportCard: React.FC<Props> = ({

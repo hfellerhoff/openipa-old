@@ -1,8 +1,11 @@
+@import './styles/colors';
+@import './styles/variables';
 * {
   font-family: 'Apple SD Gothic Neo', 'Trebuchet MS', 'Open Sans', sans-serif;
 }
 
 body {
+  background: $darkgray;
   @media screen and (max-width: 800px) {
     position: relative;
   }

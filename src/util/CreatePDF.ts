@@ -10,7 +10,6 @@ import IPA from '../constants/IPA';
 const createPDFFromResult = async (language: Languages, result: Result) => {
   return new Promise(resolve => {
     const pdf = new jsPDF();
-    const ctx = pdf.context2d;
     const footerY = 285;
     const maxY = footerY - 20;
     const maxX = 165;

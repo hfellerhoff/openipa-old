@@ -14,7 +14,7 @@ const CoffeeButton: React.FC<Props> = () => {
         src='https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg'
         alt='Buy me a coffee'
       />
-      <span style={{ marginLeft: 15, fontSize: 19 }}>Buy me a coffee</span>
+      <span style={{ marginLeft: 10, fontSize: 19 }}>Buy me a coffee</span>
     </a>
   );
 };

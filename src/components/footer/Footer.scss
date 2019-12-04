@@ -50,3 +50,42 @@
 .ipa__footer-name:hover {
   border-bottom: 2px solid $white;
 }
+
+.ipa__footer-logo-link-container {
+  margin-left: 20px;
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  box-shadow: 0px 5px 10px 3px rgba(0, 0, 0, 0.2);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // border: 2px solid transparent;
+  transition: all 0.1s ease-in-out;
+}
+
+.ipa__footer-logo-link-container-github {
+  background: $github;
+}
+
+.ipa__footer-logo-link-container-reddit {
+  background: $reddit;
+}
+
+.ipa__footer-logo-link {
+  height: 35px;
+  width: 35px;
+}
+
+.ipa__footer-logo-link-reddit {
+  height: 30px;
+  width: 30px;
+}
+
+.ipa__footer-logo-link-container:hover {
+  transform: scale(1.075);
+  box-shadow: 0px 5px 10px 3px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  // border: 2px solid $offwhite;
+}

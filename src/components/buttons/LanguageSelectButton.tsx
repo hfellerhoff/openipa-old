@@ -14,7 +14,7 @@ const LanguageSelectButton: React.FC<Props> = ({ language, status }) => {
 
   if (status !== 'inactive') {
     return (
-      <Link className={className} to={`/${language}`}>
+      <Link className={className} to={`/transcription/${language}`}>
         {capitalizeFirstLetter(language)}
       </Link>
     );

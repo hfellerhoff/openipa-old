@@ -7,7 +7,7 @@ interface Props {}
 
 const SupportPage: React.FC<Props> = () => {
   return (
-    <div className='ipa__support__container'>
+    <div className='ipa__support__container fade-in'>
       <div className='ipa__support__hero-container'>
         <h1 className='ipa__support__hero-title'>Want to support Open IPA?</h1>
         <h3 className='ipa__support__hero-subtitle'>

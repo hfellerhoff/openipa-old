@@ -8,7 +8,6 @@ import { Languages, Result } from '../constants/Interfaces';
 import Template from '../constants/Template';
 import { capitalizeFirstLetter } from '../util/StringHelper';
 import './TranscriptionPage.scss';
-import Navbar from './header/Navbar';
 import Footer from './footer/Footer';
 
 type Props = {
@@ -29,7 +28,7 @@ const TranscriptionPage: React.FC<RouteComponentProps<Props>> = ({
   if (capitalizeFirstLetter(language) in Languages) {
     return (
       <>
-        <div className='ipa__transcription__container'>
+        <div className='ipa__transcription__container fade-in'>
           <TranscriptionDescription
             language={language}
             shouldAnalyzeElision={shouldAnalyzeElision}

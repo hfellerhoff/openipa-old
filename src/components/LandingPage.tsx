@@ -11,7 +11,7 @@ interface Props extends RouteComponentProps {}
 const LandingPage: React.FC<Props> = () => {
   return (
     <>
-      <div className='ipa__landing-page__container'>
+      <div className='ipa__landing-page__container fade-in'>
         <Hero />
         <Description />
         <Demonstration />

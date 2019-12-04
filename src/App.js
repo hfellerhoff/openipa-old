@@ -7,6 +7,7 @@ import TranscriptionPage from './components/TranscriptionPage';
 import './app.scss';
 import './styles/reset.scss';
 import { useTransition, animated } from 'react-spring';
+import Variables from './constants/Variables';
 
 const App = () => {
   const location = useLocation();
@@ -14,7 +15,7 @@ const App = () => {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
-    config: { duration: 250 },
+    config: { duration: Variables.fadeDuration },
   });
 
   return transitions.map(({ item: location, props, key }) => (

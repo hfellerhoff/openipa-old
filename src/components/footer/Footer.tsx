@@ -17,7 +17,7 @@ const Footer: React.FC<Props> = () => {
         <img alt='Logo' src={henryfellerhoff} className='ipa__footer-logo' />
         <h3 className='ipa__footer-name'>Built by Henry Fellerhoff</h3>
       </a>
-      <div className='ipa__footer-logo-container'>
+      <div className='ipa__footer-logo-links'>
         <div className='ipa__footer-logo-link-container ipa__footer-logo-link-container-github'>
           <a
             href='https://github.com/hfellerhoff/openipa'

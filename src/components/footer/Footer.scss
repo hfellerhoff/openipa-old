@@ -51,8 +51,15 @@
   border-bottom: 2px solid $white;
 }
 
+.ipa__footer-logo-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 125px;
+}
+
 .ipa__footer-logo-link-container {
-  margin-left: 20px;
+  // margin-left: 20px;
   height: 50px;
   width: 50px;
   border-radius: 100%;

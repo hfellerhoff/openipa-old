@@ -4,27 +4,34 @@ import Rules from '../FrenchRules';
 import { isEndOfSentence, isConsonant, isVowel } from '../../../util/Helper';
 import { isNasalCanceling } from '../FrenchHelper';
 import transcribeLetter from '../parse-functions/transcribeLetter';
+import transcribeDefault from '../parse-functions/transcribeDefault';
+import transcribeFollowingLetter from '../parse-functions/transcribeFollowingLetter';
 
 const parseI = ({
   nextletter,
   phoneme,
   previousIPA,
 }: ParseLetterProps): Phoneme => {
-  // Initial -ill, -irr, -inn, -mm
-  if (
-    nextletter[1] + nextletter[2] === 'll' ||
-    nextletter[1] + nextletter[2] === 'rr' ||
-    nextletter[1] + nextletter[2] === 'nn' ||
-    nextletter[1] + nextletter[2] === 'mm'
-  ) {
-    phoneme = {
-      text: 'i' + nextletter[1] + nextletter[2],
-      ipa: IPA.CLOSED_I + nextletter[1] + nextletter[2],
-      rule: Rules.INITIAL_ILRNM,
-    };
+  phoneme = transcribeDefault(nextletter, IPA.CLOSED_I);
+
+  // --- Initial -ill, -irr, -inn, -mm ---
+  if (isEndOfSentence(previousIPA)) {
+    if (
+      nextletter[1] + nextletter[2] === 'll' ||
+      nextletter[1] + nextletter[2] === 'rr' ||
+      nextletter[1] + nextletter[2] === 'nn' ||
+      nextletter[1] + nextletter[2] === 'mm'
+    ) {
+      phoneme = {
+        text: 'i' + nextletter[1] + nextletter[2],
+        ipa: IPA.CLOSED_I + nextletter[1] + nextletter[2],
+        rule: Rules.INITIAL_ILRNM,
+      };
+    }
   }
-  // Final -ient verb
-  else if (
+
+  // --- Final -ient verb ---
+  if (
     nextletter[1] === 'e' &&
     nextletter[2] === 'n' &&
     nextletter[3] === 't' &&
@@ -36,8 +43,9 @@ const parseI = ({
       rule: Rules.FINAL_VERB_IENT,
     };
   }
-  // in and im nasal
-  else if (
+
+  // --- in and im nasal ---
+  if (
     (nextletter[1] === 'm' || nextletter[1] === 'n') &&
     ((isConsonant(nextletter[2]) && !isNasalCanceling(nextletter[2])) ||
       isEndOfSentence(nextletter[4]))
@@ -49,8 +57,17 @@ const parseI = ({
     };
   }
 
+  // vowel + il
+  if (isVowel(previousIPA) && nextletter[1] === 'l') {
+    phoneme = {
+      text: 'il',
+      ipa: IPA.J_GLIDE,
+      rule: Rules.VOWEL_IL,
+    };
+  }
+
   // Medial ill
-  else if (
+  if (
     !isEndOfSentence(previousIPA) &&
     nextletter[1] === 'l' &&
     nextletter[2] === 'l' &&
@@ -70,32 +87,20 @@ const parseI = ({
       };
     }
   }
-  // vowel + il
-  else if (isVowel(previousIPA) && nextletter[1] === 'l') {
-    phoneme = {
-      text: 'il',
-      ipa: IPA.J_GLIDE,
-      rule: Rules.VOWEL_IL,
-    };
-  }
+
   // Final -ie
-  else if (nextletter[1] === 'e' && isEndOfSentence(nextletter[2])) {
+  if (nextletter[1] === 'e' && isEndOfSentence(nextletter[2])) {
     phoneme = {
       text: 'ie',
       ipa: IPA.CLOSED_I,
       rule: Rules.FINAL_IE,
     };
-  } else if (isVowel(nextletter[1])) {
+  }
+  if (isVowel(nextletter[1])) {
     phoneme = {
       text: 'i',
       ipa: IPA.J_GLIDE,
       rule: Rules.IY_VOWEL,
-    };
-  } else {
-    phoneme = {
-      text: 'i',
-      ipa: IPA.CLOSED_I,
-      rule: Rules.SINGLE_I_OR_Y,
     };
   }
 

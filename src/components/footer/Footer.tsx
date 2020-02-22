@@ -1,7 +1,7 @@
 import React from 'react';
 import redditlogo from '../../assets/reddit-white.png';
 import githublogo from '../../assets/github-white.png';
-import henryfellerhoff from '../../assets/henryfellerhofflogo.png';
+import henryfellerhoff from '../../assets/henryfellerhoff-energetic.png';
 import './Footer.scss';
 
 interface Props {}

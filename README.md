@@ -3,7 +3,7 @@
 </p>
 
 <h1 align='center'>
-  Open IPA
+  <img src='readme/OpenIPA-title.png' width='350' height='100' />
 </h1>
 
 ### What is Open IPA?

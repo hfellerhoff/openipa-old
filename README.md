@@ -16,7 +16,7 @@ Open IPA is a free, fast, community-focused transcription tool to transcribe Lat
   </p>
   
 # Features
-- Free: the Open IPA editor is availible to everyone without the need to pay or sign up for an account
+- Free: the Open IPA editor is available to everyone without the need to pay or sign up for an account
 - Fast: all transcriptions happen in front of you in real-time
 - Comprehensive: in addition to getting a transcription, Open IPA provides you with the methodology behind your transcription
 - Responsive: Open IPA is designed for all devices, with experiences tailored for both desktop and mobile

@@ -11,6 +11,10 @@
 # What is Open IPA?
 Open IPA is a free, fast, community-focused transcription tool to transcribe texts in Latin, French, German, and Italian into IPA (International Phonetic Alphabet). OpenIPA transcribes text in real-time, and provides in-depth transcription feedback for each letter or group of letters transcribed. Open IPA is meant primarily for Lyric Diction and to aid in song preparation for classical voice.
 
+<p align='center'>
+<img src='readme/showcase.gif' />
+  </p>
+
 # Getting Started
 Getting started with Open IPA is easy. Simply head on over to www.openipa.org, pick the language your text is in, and type or paste it in the field provided. Open IPA will transcribe the text for you, which you are free to copy or export to a PDF using the buttons at the bottom of the editor. If you would like to know more about how your text was transcribed, simply hover over the outputted text (original or IPA) to see an in-depth analysis of how each letter, syllable, and word was transcribed.
 

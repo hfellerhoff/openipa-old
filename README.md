@@ -14,6 +14,12 @@ Open IPA is a free, fast, community-focused transcription tool to transcribe tex
 <p align='center'>
 <img src='readme/showcase.gif' />
   </p>
+  
+# Features
+- Free: the Open IPA editor is availible to everyone without the need to pay or sign up for an account
+- Fast: all transcriptions happen in front of you in real-time
+- Comprehensive: in addition to getting a transcription, Open IPA provides you with the methodology behind your transcription
+- Responsive: Open IPA is designed for all devices, with experiences tailored for both desktop and mobile
 
 # Getting Started
 Getting started with Open IPA is easy. Simply head on over to www.openipa.org, pick the language your text is in, and type or paste it in the field provided. Open IPA will transcribe the text for you, which you are free to copy or export to a PDF using the buttons at the bottom of the editor. If you would like to know more about how your text was transcribed, simply hover over the outputted text (original or IPA) to see an in-depth analysis of how each letter, syllable, and word was transcribed.

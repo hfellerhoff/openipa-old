@@ -34,5 +34,36 @@ While we strive to have our transcription algorithm be as accurate as possible, 
 ### How can I get involved?
 As Open IPA is open-source, contributions are welcome. In addition, if you have any comments, questions, or feedback you are welcome to join us over at [r/openipa](https://www.reddit.com/r/openipa/). We hope to see you there!
 
+### I don't know much about IPA Transcription. How can I try it out?
+#### Try using this text from Massenet's _Vision Fugitive_:
+Ce breuvage pourrait me donner un tel rêve! </br>
+Je pourrais la revoir...</br>
+Comtempler sa beauté!</br>
+Divine volupté à  mes regards promise!</br>
+Espérance trop brève</br>
+Qui viens bercer mon coeur</br>
+et troubler ma raison...</br>
+Ah! ne t'enfuis pas douce illusion! </br>
+
+Vision fugitive et toujours poursuivie</br>
+Ange mystérieux qui prend toute ma vie...</br>
+Ah! c'est toi! que je veux voir</br>
+Ô mon amour! ô mon espoir!</br>
+Vision fugitive! c'est toi!</br>
+Qui prends toute ma vie!</br>
+Te presser dans mes bras!</br>
+Sentir battre ton coeur</br>
+D'une amoureuse ardeur!</br>
+Puis mourir enlacés...</br>
+Dans une même ivresse...</br>
+Pour ces transports... pour cette flamme.</br>
+Ah! sans remords et sans plainte</br>
+Je donnerais mon âme</br>
+Pour toi mon amour! mon espoir!</br>
+Vision fugitive! c'est toi!</br>
+Qui prends toute ma vie!</br>
+Oui! c'est toi! mon amour!</br>
+Toi, mon seul amour! mon espoir!</br>
+
 # License
 Open IPA is under the GNU Affero General Public License v3.0. See the [LICENSE](https://github.com/hfellerhoff/openipa/blob/master/LICENSE) for more information.

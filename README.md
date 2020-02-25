@@ -35,7 +35,7 @@ While we strive to have our transcription algorithm be as accurate as possible, 
 As Open IPA is open-source, contributions are welcome. In addition, if you have any comments, questions, or feedback you are welcome to join us over at [r/openipa](https://www.reddit.com/r/openipa/). We hope to see you there!
 
 ### I don't know much about IPA Transcription. How can I try it out?
-#### Try using this text from Massenet's _Vision Fugitive_:
+#### Try using this French text from Massenet's _Vision Fugitive_:
 Ce breuvage pourrait me donner un tel rêve! </br>
 Je pourrais la revoir...</br>
 Comtempler sa beauté!</br>

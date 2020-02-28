@@ -2,6 +2,7 @@ import React from 'react';
 import SupportCard from './SupportCard';
 import redditlogo from '../../assets/reddit-white.png';
 import githublogo from '../../assets/github-white.png';
+import ReactGA from 'react-ga';
 interface Props {}
 
 const LeftCard: React.FC<Props> = () => {
@@ -15,10 +16,11 @@ const LeftCard: React.FC<Props> = () => {
           and edge cases, it requires more than just one person to keep afloat. If you would like to 
           follow the project or take part in development, please:'
     >
-      <a
+      <ReactGA.OutboundLink
         className='ipa__support__card-link ipa__support__card-link--reddit'
-        href='https://www.reddit.com/r/openipa/'
-        target='_blank noopener noreferrer'
+        eventLabel='Reddit'
+        to='https://www.reddit.com/r/openipa/'
+        target='_blank'
       >
         <img
           src={redditlogo}
@@ -28,11 +30,13 @@ const LeftCard: React.FC<Props> = () => {
         <span className='ipa__support__card-link-title'>
           Join the Community
         </span>
-      </a>
-      <a
+      </ReactGA.OutboundLink>
+
+      <ReactGA.OutboundLink
         className='ipa__support__card-link ipa__support__card-link--github'
-        href='https://github.com/hfellerhoff/openipa'
-        target='_blank noopener noreferrer'
+        eventLabel='Github'
+        to='https://github.com/hfellerhoff/openipa'
+        target='_blank'
       >
         <img
           src={githublogo}
@@ -42,7 +46,7 @@ const LeftCard: React.FC<Props> = () => {
         <span className='ipa__support__card-link-title'>
           Contribute to Development
         </span>
-      </a>
+      </ReactGA.OutboundLink>
     </SupportCard>
   );
 };

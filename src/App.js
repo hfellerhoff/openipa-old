@@ -8,6 +8,10 @@ import './app.scss';
 import './styles/reset.scss';
 import { useTransition, animated } from 'react-spring';
 import Variables from './constants/Variables';
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('UA-159326184-1');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 const App = () => {
   const location = useLocation();

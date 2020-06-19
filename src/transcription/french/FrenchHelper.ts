@@ -36,6 +36,7 @@ export const isGlideFollowing = (
 };
 
 export const isNasalCanceling = (char: string) => {
+  if (!char) return false;
   return ['m', 'n', 'h', ...Letters.vowels].indexOf(char.toLowerCase()) !== -1;
 };
 

@@ -5,7 +5,6 @@ import { isEndOfSentence, isConsonant, isVowel } from '../../../util/Helper';
 import { isNasalCanceling } from '../FrenchHelper';
 import transcribeLetter from '../parse-functions/transcribeLetter';
 import transcribeDefault from '../parse-functions/transcribeDefault';
-import transcribeFollowingLetter from '../parse-functions/transcribeFollowingLetter';
 
 const parseI = ({
   nextletter,

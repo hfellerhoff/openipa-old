@@ -489,26 +489,7 @@ const parseLatin = (text: string) => {
     previousPhoneme = phoneme.ipa[phoneme.ipa.length - 1];
   }
 
-  // return result;
-  return {
-    lines: [
-      {
-        words: [
-          {
-            syllables: [
-              {
-                text:
-                  'Note: Latin transcription is disabled for one week, from September 22nd – September 29th. Sorry for the inconvenience!',
-                ipa: '',
-                rule:
-                  "And if you're in Klaus Georg's diction class, get back to your exam!",
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  };
+  return result;
 };
 
 export default parseLatin;

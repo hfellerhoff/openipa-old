@@ -47,12 +47,12 @@ const parseI = ({
   if (
     (nextletter[1] === 'm' || nextletter[1] === 'n') &&
     ((isConsonant(nextletter[2]) && !isNasalCanceling(nextletter[2])) ||
-      isEndOfSentence(nextletter[4]))
+      isEndOfSentence(nextletter[2]))
   ) {
     phoneme = {
       text: 'i' + nextletter[1],
       ipa: IPA.NASAL_E,
-      rule: Rules.NASAL_AIM,
+      rule: Rules.NASAL_IY,
     };
   }
 

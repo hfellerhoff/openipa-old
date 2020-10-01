@@ -31,10 +31,12 @@ const Rules = {
   TH: `A 'th' consonant group is transcribed as [${IPA.T}].`,
   PH: `A 'ph' consonant group is transcribed as [${IPA.F}].`,
   B_ST: `A 'b' consonant followed by an 's' or 't' consonant devoices and is transcribed as [${IPA.P}].`,
-  X_VOWEL: `An 'x' consonant followed by a vowel or an 'h' consonant is transcribed as [${IPA.G +
-    IPA.Z}].`,
-  X_CONSONANT: `An 'x' consonant followed by a consonant is transcribed as [${IPA.K +
-    IPA.S}].`,
+  X_VOWEL: `An 'x' consonant followed by a vowel or an 'h' consonant is transcribed as [${
+    IPA.G + IPA.Z
+  }].`,
+  X_CONSONANT: `An 'x' consonant followed by a consonant is transcribed as [${
+    IPA.K + IPA.S
+  }].`,
   SILENT_FINAL_CONSONANT: `All final consonants besides 'c', 'r', 'f', and 'l' are silent.`,
   SINGLE_A: `Single 'a' vowels are transcribed as [${IPA.BRIGHT_A}].`,
   SINGLE_E_DOUBLE_CONSONANT: `Single 'e' vowels followed by two or more consonants are transcribed as [${IPA.OPEN_E}].`,
@@ -53,19 +55,23 @@ const Rules = {
   ACCENT_U: `All 'û' vowels with a circumflex accent are transcribed as [${IPA.CLOSED_Y}].`,
   FINAL_AS: `For the purpose of Lyric Diction, all final '-as' letter groups can be transcribed as [${IPA.BRIGHT_A}].`,
   FINAL_E_DRZ: `Final '-ed(s)', '-er(s)', and 'ez' endings are transcribed as [${IPA.CLOSED_E}].`,
-  FINAL_EC: `Final '-ec(s)' endings are transcribed as [${IPA.OPEN_E +
-    IPA.K}].`,
-  FINAL_EF: `Final '-ef(s)' endings are transcribed as [${IPA.OPEN_E +
-    IPA.F}].`,
-  FINAL_EL: `Final '-el(s)' endings are transcribed as [${IPA.OPEN_E +
-    IPA.L}].`,
+  FINAL_EC: `Final '-ec(s)' endings are transcribed as [${
+    IPA.OPEN_E + IPA.K
+  }].`,
+  FINAL_EF: `Final '-ef(s)' endings are transcribed as [${
+    IPA.OPEN_E + IPA.F
+  }].`,
+  FINAL_EL: `Final '-el(s)' endings are transcribed as [${
+    IPA.OPEN_E + IPA.L
+  }].`,
   FINAL_ET: `Final '-et(s)' endings are transcribed as [${IPA.OPEN_E}]. Note: Final [${IPA.OPEN_E}] vowels are typically pronounced a bit more closed than a typical [${IPA.OPEN_E}].`,
   FINAL_O_SILENTCONSONANT: `Final 'o' vowels followed by a silent consonant are transcribed as [${IPA.CLOSED_O}].`,
   FINAL_IE: `Final '-ie' letter groups are transcribed as [${IPA.CLOSED_I}].`,
   FINAL_AI: `Final '-ai' verb endings are transcribed as [${IPA.CLOSED_E}]. If this word is not a verb, it is most likely transcribed as [${IPA.OPEN_E}].`,
   AI: `All non-final 'ai' and 'aî' vowel clusters are transcribed as [${IPA.OPEN_E}].`,
-  AY: `All 'ay' vowel clusters are transcribed as [${IPA.OPEN_E +
-    IPA.J_GLIDE}].`,
+  AY: `All 'ay' vowel clusters are transcribed as [${
+    IPA.OPEN_E + IPA.J_GLIDE
+  }].`,
   EI: `All 'ei' vowel clusters are transcribed as [${IPA.OPEN_E}].`,
   VOCALIC_HARMONIZATION_E: `This [${IPA.OPEN_E}] is transcribed as [(${IPA.CLOSED_E})] because of vocalic harmonization, in which an open vowel gets closed to match a closed vowel later on in the word.`,
   AU_EAU: `'au', 'aux', 'eau', and 'eau' vowel clusters are transcribed as [${IPA.CLOSED_O}].`,
@@ -81,23 +87,26 @@ const Rules = {
   OU_VOWEL: `'ou' vowel clusters followed by a vowel are transcribed as [${IPA.W_GLIDE}].`,
   U_VOWEL: `'u' vowels followed by a vowel are transcribed as [${IPA.Y_GLIDE}].`,
   MEDIAL_ILL_VOWEL: `Medial 'ill' letter groups preceded by a vowel are transcribed as [${IPA.J_GLIDE}].`,
-  MEDIAL_ILL_CONSONANT: `Medial 'ill' letter groups preceded by a consonant are transcribed as [${IPA.CLOSED_I +
-    IPA.J_GLIDE}].`,
+  MEDIAL_ILL_CONSONANT: `Medial 'ill' letter groups preceded by a consonant are transcribed as [${
+    IPA.CLOSED_I + IPA.J_GLIDE
+  }].`,
   VOWEL_IL: `'il' letter groups preceded by a vowel are transcribed as [${IPA.J_GLIDE}].`,
   OI: `'oi' vowel clusters are transcribed as [${IPA.W_GLIDE + IPA.BRIGHT_A}].`,
-  OY: `'oy' vowel clusters are transcribed as [${IPA.W_GLIDE +
-    IPA.BRIGHT_A +
-    IPA.J_GLIDE}].`,
-  RE_PREFIX: `All '-re' prefixes are transcribed as [${IPA.FLIPPED_R +
-    IPA.SCHWA}].`,
+  OY: `'oy' vowel clusters are transcribed as [${
+    IPA.W_GLIDE + IPA.BRIGHT_A + IPA.J_GLIDE
+  }].`,
+  RE_PREFIX: `All '-re' prefixes are transcribed as [${
+    IPA.FLIPPED_R + IPA.SCHWA
+  }].`,
   INITIAL_REST: `Inital 'rest-' and 'resp-' letter clusters are transcribed with an open [${IPA.OPEN_E}].`,
   INTERCONSONANT_SCHWA: `An 'e' vowel in between two consonants and followed by a vowel is transcribed as [${IPA.SCHWA}].`,
   FINAL_VERB_ENT: `Final '-ent' verb endings are transcribed as [${IPA.SCHWA}]. If this word is not a verb, it is transcribed as [${IPA.NASAL_A}].`,
-  FAIS_VOWEL: `The verb 'fais' followed by a vowel is transcribed as [${IPA.F +
-    IPA.SCHWA +
-    IPA.Z}].`,
-  FINAL_VERB_IENT: `Final '-ient' verb endings are transcribed as [${IPA.J_GLIDE +
-    IPA.NASAL_E}].`,
+  FAIS_VOWEL: `The verb 'fais' followed by a vowel is transcribed as [${
+    IPA.F + IPA.SCHWA + IPA.Z
+  }].`,
+  FINAL_VERB_IENT: `Final '-ient' verb endings are transcribed as [${
+    IPA.J_GLIDE + IPA.NASAL_E
+  }].`,
   FINAL_VERB_AIENT: `Final '-aient' verb endings are transcribed as [${IPA.OPEN_E}].`,
   NASAL_EAMN_CONSONANT: `'am', 'em', 'an', and 'en' letter groups followed by a consonant (except m, n, and h) are transcribed as [${IPA.NASAL_A}].`,
   FINAL_AN: `Final 'an' letter groups are transcribed as [${IPA.NASAL_A}].`,
@@ -106,8 +115,9 @@ const Rules = {
   NASAL_AIM: `'aim', 'ain', and 'ein' letter groups that are final or followed by a consonant (except m, n, and h) are transcribed as [${IPA.NASAL_E}].`,
   NASAL_IY: `'in', 'im', 'yn', and 'ym' letter groups that are final or followed by a consonant (except m, n, and h) are transcribed as [${IPA.NASAL_E}].`,
   FINAL_ENS: `Final -en(s) letter clusters are transcribed as [${IPA.NASAL_E}].`,
-  NASAL_OIN: `'oin' letter clusters that are final or followed by a consonant are transcribed as [${IPA.W_GLIDE +
-    IPA.NASAL_E}]`,
+  NASAL_OIN: `'oin' letter clusters that are final or followed by a consonant are transcribed as [${
+    IPA.W_GLIDE + IPA.NASAL_E
+  }]`,
   NASAL_UMN: `'um' and 'un' letter groups that are final or followed by a consonant (except m, n, and h) are transcribed as [${IPA.NASAL_MIXED_O}].`,
   DEFAULT_E: `If no other rule applies, transcribe 'e' vowels as [${IPA.OPEN_E}].`,
   FINAL_ENT: `Final '-ent' verb endings are transcribed as [${IPA.SCHWA}]. If this is not a verb, it should be transcribed as [${IPA.NASAL_A}].`,

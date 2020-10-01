@@ -9,7 +9,7 @@ const parseY = ({ nextletter, phoneme }: ParseLetterProps): Phoneme => {
   if (
     (nextletter[1] === 'm' || nextletter[1] === 'n') &&
     ((isConsonant(nextletter[2]) && !isNasalCanceling(nextletter[2])) ||
-      isEndOfSentence(nextletter[4]))
+      isEndOfSentence(nextletter[2]))
   ) {
     phoneme = {
       text: 'y' + nextletter[1],
